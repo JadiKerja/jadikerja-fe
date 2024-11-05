@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import SplashScreen from '@/modules/HomeModule/SplashScreen.vue';
-import IntroPage from '@/modules/HomeModule/IntroPage.vue';
+import { ref, onMounted } from 'vue'
+import SplashScreen from '@/modules/HomeModule/SplashScreen.vue'
+import IntroPage from '@/modules/HomeModule/IntroPage.vue'
 
-const showSplashScreen = ref(true);
+const showSplashScreen = ref(true)
 
 onMounted(() => {
   setTimeout(() => {
-    showSplashScreen.value = false;
-  }, 1000);
-});
+    showSplashScreen.value = false
+  }, 1000)
+})
 </script>
 
 <template>
@@ -25,11 +25,12 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 1s ease;
 }
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
