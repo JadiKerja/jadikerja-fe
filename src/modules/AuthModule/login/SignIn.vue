@@ -5,6 +5,7 @@ import InputAuth from '@/components/elements/InputAuth.vue'
 import MessageIcon from '@/assets/images/MessageIcon.vue'
 import LockIcon from '@/assets/images/LockIcon.vue'
 import GoogleButton from '@/components/elements/button/GoogleButton.vue'
+import { RouterLink } from 'vue-router'
 
 const emit = defineEmits(['loginSuccess'])
 
@@ -44,7 +45,7 @@ function handleLogin() {
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Belum Punya Akun?
-        <a href="/register" class="text-[#D62727]">Daftar</a>
+        <RouterLink to="/register" class="text-[#D62727]">Daftar</RouterLink>
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>
