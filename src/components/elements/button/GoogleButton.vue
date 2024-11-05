@@ -6,11 +6,13 @@ import GoogleIcon from '@/assets/images/GoogleIcon.vue'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import { useAuthStore } from '../../../stores/userStores'
+import { useAuthStore } from '@/stores/userStores'
 
 const isLoading = ref(false)
 const errorMessage = ref('')
 const authStore = useAuthStore()
+const router = useRouter()
+const emit = defineEmits(['loginSuccess'])
 
 async function handleGoogleLogin() {
   try {
@@ -27,6 +29,14 @@ async function handleGoogleLogin() {
     )
 
     if (response.data.code === 200 && response.data.data.goToOnBoarding) {
+      const accessToken = response.data.data.accessToken
+      Cookies.set('accessToken', accessToken)
+      router.push('/lengkapi-profile')
+    } else if (response.data.code === 200) {
+      const accessToken = response.data.data.accessToken
+      Cookies.set('accessToken', accessToken)
+      authStore.setUser(response.data.data.user)
+      emit('loginSuccess')
     }
   } catch (error) {
     console.error('Google OAuth login failed:', error)

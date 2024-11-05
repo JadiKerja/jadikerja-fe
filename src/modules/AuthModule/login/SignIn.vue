@@ -50,6 +50,10 @@ onMounted(() => {
     return true
   })
 })
+
+function handleGoogleLoginSuccess() {
+  emit('loginSuccess')
+}
 </script>
 
 <template>
@@ -83,16 +87,16 @@ onMounted(() => {
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Belum Punya Akun?
-        <RouterLink to="/register" @click="clearFields" class="text-[#D62727]"
-          >Daftar</RouterLink
-        >
+        <RouterLink to="/register" @click="clearFields" class="text-[#D62727]">
+          Daftar
+        </RouterLink>
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>
         <p class="text-sm font-semibold">Atau</p>
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>
       </div>
-      <GoogleButton class="mt-1" />
+      <GoogleButton class="mt-1" @loginSuccess="handleGoogleLoginSuccess" />
     </div>
   </div>
 </template>
