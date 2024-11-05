@@ -5,12 +5,12 @@ import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 
 <template>
   <div
-    class="w-full relative flex justify-center items-end min-h-screen bg-[#D62727]"
+    class="w-full relative flex justify-center items-end h-screen bg-[#D62727]"
   >
     <TransparentCircle
       class="absolute top-[13rem] -left-[11rem]"
     ></TransparentCircle>
-    <SuccessRegisChar class="absolute top-0 right-5" />
+    <SuccessRegisChar class="absolute top-8 right-5" />
     <div
       class="flex flex-col font-semibold text-white absolute top-[15rem] max-w-40 left-10"
     >

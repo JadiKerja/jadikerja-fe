@@ -29,6 +29,7 @@ function handleLogin() {
       <InputAuth
         label="Password"
         placeholder="Masukkan Password"
+        type="password"
         field="password"
         :LeftIcon="LockIcon"
         :rightIcon="true"
