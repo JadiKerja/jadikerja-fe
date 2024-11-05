@@ -43,7 +43,6 @@ onMounted(() => {
     return true
   })
 })
-
 </script>
 
 <template>
@@ -88,7 +87,9 @@ onMounted(() => {
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Sudah Punya Akun?
-        <RouterLink to="/login" @click="clearFields" class="text-[#D62727]">Masuk</RouterLink>
+        <RouterLink to="/login" @click="clearFields" class="text-[#D62727]"
+          >Masuk</RouterLink
+        >
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>

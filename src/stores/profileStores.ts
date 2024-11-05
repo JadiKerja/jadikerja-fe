@@ -14,5 +14,10 @@ export const useProfileStore = defineStore('profile', () => {
     selectedImage.value = null
   }
 
-  return { selectedImage, selectedImageUrl, setSelectedImage, clearSelectedImage }
+  return {
+    selectedImage,
+    selectedImageUrl,
+    setSelectedImage,
+    clearSelectedImage,
+  }
 })

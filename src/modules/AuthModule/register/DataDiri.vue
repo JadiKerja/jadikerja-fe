@@ -1,45 +1,45 @@
 <script setup lang="ts">
-import { useProfileStore } from '@/stores/profileStores';
-import { useInputStore } from '@/stores/authStores';
-import { useAuthStore } from '@/stores/userStores';
-import { computed, ref } from 'vue';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import InputImage from '@/components/elements/InputImage.vue';
-import InputAuth from '@/components/elements/InputAuth.vue';
-import BackButton from '@/components/elements/button/BackButton.vue';
-import { uploadFile } from '@/services/postFile';
+import { useProfileStore } from '@/stores/profileStores'
+import { useInputStore } from '@/stores/authStores'
+import { useAuthStore } from '@/stores/userStores'
+import { computed, ref } from 'vue'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import InputImage from '@/components/elements/InputImage.vue'
+import InputAuth from '@/components/elements/InputAuth.vue'
+import BackButton from '@/components/elements/button/BackButton.vue'
+import { uploadFile } from '@/services/postFile'
 
-const profileStore = useProfileStore();
-const authStore = useInputStore();
-const authPiniaStore = useAuthStore();
+const profileStore = useProfileStore()
+const authStore = useInputStore()
+const authPiniaStore = useAuthStore()
 const selectedImage = computed(() => profileStore.selectedImage)
-const emit = defineEmits(['back', 'submit']);
-const imageUploadError = ref<string | null>(null);
+const emit = defineEmits(['back', 'submit'])
+const imageUploadError = ref<string | null>(null)
 
 function handleFileChange(event: Event) {
-  const target = event.target as HTMLInputElement;
-  const file = target.files?.[0];
+  const target = event.target as HTMLInputElement
+  const file = target.files?.[0]
   if (file) {
-    profileStore.setSelectedImage(file);
-    imageUploadError.value = null;
+    profileStore.setSelectedImage(file)
+    imageUploadError.value = null
   }
 }
 
 async function handleSubmit() {
   try {
-    let imageUrl = null;
+    let imageUrl = null
 
     if (profileStore.selectedImage instanceof File) {
       imageUrl = await uploadFile({
         file: profileStore.selectedImage,
         folder: 'profile_pictures',
-      });
+      })
     }
 
     if (!imageUrl) {
-      imageUploadError.value = 'Failed to upload image. Please try again.';
-      return;
+      imageUploadError.value = 'Failed to upload image. Please try again.'
+      return
     }
 
     const formData = {
@@ -51,18 +51,22 @@ async function handleSubmit() {
       domicile: authStore.location,
       phone: authStore.phoneNumber,
       profileUrl: imageUrl,
-    };
+    }
 
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData);
-    const { accessToken, user } = response.data.data;
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/auth/register`,
+      formData,
+    )
+    const { accessToken, user } = response.data.data
 
-    Cookies.set('accessToken', accessToken);
-    authPiniaStore.setUser(user);
+    Cookies.set('accessToken', accessToken)
+    authPiniaStore.setUser(user)
 
-    emit('submit');
+    emit('submit')
   } catch (error) {
-    console.error('Error submitting profile:', error);
-    imageUploadError.value = 'An error occurred during submission. Please try again.';
+    console.error('Error submitting profile:', error)
+    imageUploadError.value =
+      'An error occurred during submission. Please try again.'
   }
 }
 </script>
@@ -80,12 +84,27 @@ async function handleSubmit() {
       @submit.prevent="handleSubmit"
     >
       <InputImage :selectedImage="selectedImage" @change="handleFileChange" />
-      <p v-if="imageUploadError" class="text-red-500 text-sm">{{ imageUploadError }}</p>
+      <p v-if="imageUploadError" class="text-red-500 text-sm">
+        {{ imageUploadError }}
+      </p>
 
-      <InputAuth label="Nama Lengkap" placeholder="Nama Lengkap" field="fullName" />
-      <InputAuth label="Tanggal Lahir" placeholder="DD/MM/YYYY" field="birthDate" type="date" />
+      <InputAuth
+        label="Nama Lengkap"
+        placeholder="Nama Lengkap"
+        field="fullName"
+      />
+      <InputAuth
+        label="Tanggal Lahir"
+        placeholder="DD/MM/YYYY"
+        field="birthDate"
+        type="date"
+      />
       <InputAuth label="Domisili" placeholder="Domisili" field="location" />
-      <InputAuth label="No. Telepon" placeholder="No. Telepon" field="phoneNumber" />
+      <InputAuth
+        label="No. Telepon"
+        placeholder="No. Telepon"
+        field="phoneNumber"
+      />
 
       <button
         type="submit"

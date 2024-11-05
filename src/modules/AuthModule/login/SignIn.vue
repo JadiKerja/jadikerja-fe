@@ -22,10 +22,13 @@ async function handleLogin() {
       email: auth.email,
       password: auth.password,
     }
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/basic-login`, formData)
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/auth/basic-login`,
+      formData,
+    )
     const { accessToken, user } = response.data.data
 
-    Cookies.set('accessToken', accessToken) 
+    Cookies.set('accessToken', accessToken)
     authPiniaStore.setUser(user)
 
     emit('loginSuccess')
@@ -80,7 +83,9 @@ onMounted(() => {
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Belum Punya Akun?
-        <RouterLink to="/register" @click="clearFields" class="text-[#D62727]">Daftar</RouterLink>
+        <RouterLink to="/register" @click="clearFields" class="text-[#D62727]"
+          >Daftar</RouterLink
+        >
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>

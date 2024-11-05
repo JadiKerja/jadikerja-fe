@@ -15,11 +15,14 @@ export const useAuthStore = defineStore('auth', () => {
     if (token) {
       isLoading.value = true
       try {
-        const response = await axios.get(`${import.meta.env.VUE_APP_API_URL}/auth/user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await axios.get(
+          `${import.meta.env.VUE_APP_API_URL}/auth/user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        })
+        )
 
         if (response.data) {
           user.value = response.data.data.user

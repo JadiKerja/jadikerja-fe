@@ -1,48 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { authFirebase } from '@/components/utils/firebase';
-import GoogleIcon from '@/assets/images/GoogleIcon.vue';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useAuthStore } from '../../../stores/userStores';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { authFirebase } from '@/components/utils/firebase'
+import GoogleIcon from '@/assets/images/GoogleIcon.vue'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useAuthStore } from '../../../stores/userStores'
 
-const isLoading = ref(false);
-const errorMessage = ref('');
-const authStore = useAuthStore();
+const isLoading = ref(false)
+const errorMessage = ref('')
+const authStore = useAuthStore()
 
 async function handleGoogleLogin() {
   try {
-    isLoading.value = true;
-    errorMessage.value = '';
+    isLoading.value = true
+    errorMessage.value = ''
 
-    const provider = new GoogleAuthProvider();
-    const { user: googleUser } = await signInWithPopup(authFirebase, provider);
-    const firebaseToken = await googleUser.getIdToken();
+    const provider = new GoogleAuthProvider()
+    const { user: googleUser } = await signInWithPopup(authFirebase, provider)
+    const firebaseToken = await googleUser.getIdToken()
 
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/auth/oauth`,
-      { firebaseToken }
-    );
+      { firebaseToken },
+    )
 
     if (response.data.code === 200 && response.data.data.goToOnBoarding) {
     }
   } catch (error) {
-    console.error('Google OAuth login failed:', error);
-    errorMessage.value = 'Login failed. Please try again.';
+    console.error('Google OAuth login failed:', error)
+    errorMessage.value = 'Login failed. Please try again.'
   } finally {
-    isLoading.value = false;
+    isLoading.value = false
   }
 }
 </script>
 
 <template>
-  <button
-    @click="handleGoogleLogin"
-    :disabled="isLoading"
-  >
+  <button @click="handleGoogleLogin" :disabled="isLoading">
     <GoogleIcon />
   </button>
-  <p v-if="errorMessage" class="text-red-500 text-sm mt-2">{{ errorMessage }}</p>
+  <p v-if="errorMessage" class="text-red-500 text-sm mt-2">
+    {{ errorMessage }}
+  </p>
 </template>
