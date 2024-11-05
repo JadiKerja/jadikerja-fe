@@ -1,24 +1,32 @@
 <script setup lang="ts">
-import { defineProps, ref, computed } from 'vue';
-import EyeIcon from '@/assets/images/Eye.vue';
-import EyeSlashIcon from '@/assets/images/EyeSlash.vue';
+import { defineProps, ref, computed } from 'vue'
+import EyeIcon from '@/assets/images/Eye.vue'
+import EyeSlashIcon from '@/assets/images/EyeSlash.vue'
 
 const props = defineProps<{
-  label: string;
-  placeholder: string;
-  LeftIcon?: any;
-  rightIcon?: boolean;
-}>();
+  label: string
+  placeholder: string
+  LeftIcon?: any
+  rightIcon?: boolean
+}>()
 
-const inputValue = ref('');
-const isFocused = ref(false);
-const showPassword = ref(false);
+const inputValue = ref('')
+const isFocused = ref(false)
+const showPassword = ref(false)
 
-const iconColor = computed(() => (inputValue.value || isFocused.value ? '#D62727' : '#AEACAC'));
-const iconPasswordColor = computed(() => (inputValue.value || isFocused.value ? '#000' : '#AEACAC'));
-const borderColor = computed(() => (inputValue.value || isFocused.value ? 'border-[#D62727]' : 'border-[#AEACAC]'));
-const inputType = computed(() => (showPassword.value ? 'text' : 'password'));
-const RightIconComponent = computed(() => (showPassword.value ? EyeIcon : EyeSlashIcon));
+const iconColor = computed(() =>
+  inputValue.value || isFocused.value ? '#D62727' : '#AEACAC',
+)
+const iconPasswordColor = computed(() =>
+  inputValue.value || isFocused.value ? '#000' : '#AEACAC',
+)
+const borderColor = computed(() =>
+  inputValue.value || isFocused.value ? 'border-[#D62727]' : 'border-[#AEACAC]',
+)
+const inputType = computed(() => (showPassword.value ? 'text' : 'password'))
+const RightIconComponent = computed(() =>
+  showPassword.value ? EyeIcon : EyeSlashIcon,
+)
 </script>
 
 <template>
@@ -37,11 +45,11 @@ const RightIconComponent = computed(() => (showPassword.value ? EyeIcon : EyeSla
         :type="inputType"
         v-model="inputValue"
         :placeholder="placeholder"
-        :class="[ 
+        :class="[
           'border-[1.506px] border-solid py-4 rounded-[0.6275rem] flex items-center bg-white w-full text-black placeholder:text-[#AEACAC]',
           borderColor,
           LeftIcon ? 'pl-12' : 'pl-4',
-          rightIcon ? 'pr-12' : 'pr-4'
+          rightIcon ? 'pr-12' : 'pr-4',
         ]"
         @focus="isFocused = true"
         @blur="isFocused = false"

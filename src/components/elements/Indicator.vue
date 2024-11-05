@@ -4,7 +4,6 @@ import ButtonIndicator from '@/assets/images/ButtonIndicator.vue'
 const props = defineProps<{
   activeIndex: number
 }>()
-
 </script>
 
 <template>

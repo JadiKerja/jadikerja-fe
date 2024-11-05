@@ -1,14 +1,13 @@
 <script setup lang="ts">
-
 type SvgProps = {
-  width?: number;
-  height?: number;
-};
+  width?: number
+  height?: number
+}
 
-const props = defineProps<SvgProps>();
+const props = defineProps<SvgProps>()
 
-const defaultWidth = 260;
-const defaultHeight = 278;
+const defaultWidth = 260
+const defaultHeight = 278
 </script>
 
 <template>
