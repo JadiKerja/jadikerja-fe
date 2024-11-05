@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Indicator from '@/components/elements/Indicator.vue'
-import NextButton from '@/components/elements/NextButton.vue'
-import SkipButton from '@/components/elements/SkipButton.vue'
+import NextButton from '@/components/elements/button/NextButton.vue'
+import SkipButton from '@/components/elements/button/SkipButton.vue'
 
 const activeIndex = ref(1)
 const router = useRouter()
