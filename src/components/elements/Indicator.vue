@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
-import ButtonIndicator from '@/assets/images/ButtonIndicator.vue';
+import { defineProps, defineEmits } from 'vue'
+import ButtonIndicator from '@/assets/images/ButtonIndicator.vue'
 
 const props = defineProps<{
-  activeIndex: number;
-}>();
+  activeIndex: number
+}>()
 
 // const emits = defineEmits<{
 //   (e: 'update:activeIndex', index: number): void;
 // }>();
-
 </script>
 
 <template>
