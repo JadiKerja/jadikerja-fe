@@ -62,7 +62,7 @@ async function handleSubmit() {
       phone: authStore.phoneNumber,
       profileUrl: imageUrl,
     }
-    
+
     const token = Cookies.get('accessToken')
     if (!token) {
       formError.value = 'Authentication error. Please log in again.'
@@ -76,15 +76,15 @@ async function handleSubmit() {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     )
     const { user } = response.data.data
-    
-    authPiniaStore.setUser(user)
 
+    authPiniaStore.setUser(user)
   } catch (error) {
     console.error('Error submitting profile:', error)
-    imageUploadError.value = 'An error occurred during submission. Please try again.'
+    imageUploadError.value =
+      'An error occurred during submission. Please try again.'
   }
 }
 </script>
@@ -102,10 +102,23 @@ async function handleSubmit() {
     >
       <InputImage :selectedImage="selectedImage" @change="handleFileChange" />
 
-      <InputAuth label="Nama Lengkap" placeholder="Nama Lengkap" field="fullName" />
-      <InputAuth label="Tanggal Lahir" placeholder="DD/MM/YYYY" field="birthDate" type="date" />
+      <InputAuth
+        label="Nama Lengkap"
+        placeholder="Nama Lengkap"
+        field="fullName"
+      />
+      <InputAuth
+        label="Tanggal Lahir"
+        placeholder="DD/MM/YYYY"
+        field="birthDate"
+        type="date"
+      />
       <InputAuth label="Domisili" placeholder="Domisili" field="location" />
-      <InputAuth label="No. Telepon" placeholder="No. Telepon" field="phoneNumber" />
+      <InputAuth
+        label="No. Telepon"
+        placeholder="No. Telepon"
+        field="phoneNumber"
+      />
 
       <p v-if="imageUploadError" class="text-red-500 text-sm">
         {{ imageUploadError }}

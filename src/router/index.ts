@@ -25,8 +25,8 @@ const router = createRouter({
     {
       path: '/lengkapi-profile',
       name: 'lengkapi profile',
-      component: EditProfile
-    }
+      component: EditProfile,
+    },
   ],
 })
 
