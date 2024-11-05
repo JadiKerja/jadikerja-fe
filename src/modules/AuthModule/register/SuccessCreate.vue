@@ -21,9 +21,15 @@ import TransparentCircle from '@/components/elements/TransparentCircle.vue'
       class="rounded-t-[2.9475rem] w-full bg-white flex flex-col items-center gap-[1.25rem] pt-[2.5rem] pb-[4.5rem] px-[3rem] z-10"
     >
       <div class="text-center">
-        <span class="text-[1.25rem] font-semibold text-black flex flex-row gap-1">
+        <span
+          class="text-[1.25rem] font-semibold text-black flex flex-row gap-1"
+        >
           Selamat datang di
-          <span class="text-[#D62727] text-[1.25rem] font-semibold">Jadi<span class="text-[#E55A24] text-[1.25rem] font-semibold">Kerja</span></span>
+          <span class="text-[#D62727] text-[1.25rem] font-semibold"
+            >Jadi<span class="text-[#E55A24] text-[1.25rem] font-semibold"
+              >Kerja</span
+            ></span
+          >
         </span>
         <p class="font-medium text-[#AEACAC]">
           Mulai cari kerja dari sekarang yuk

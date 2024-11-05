@@ -22,7 +22,11 @@ function goToSuccessCreate() {
 <template>
   <div>
     <SignUp v-if="currentView === 'SignUp'" @nextStep="goToDataDiri" />
-    <DataDiri v-else-if="currentView === 'DataDiri'" @back="goToSignUp" @submit="goToSuccessCreate" />
+    <DataDiri
+      v-else-if="currentView === 'DataDiri'"
+      @back="goToSignUp"
+      @submit="goToSuccessCreate"
+    />
     <SuccessCreate v-else />
   </div>
 </template>

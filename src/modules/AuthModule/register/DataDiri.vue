@@ -32,10 +32,23 @@ const emit = defineEmits(['back', 'submit'])
       @submit.prevent="emit('submit')"
     >
       <InputImage />
-      <InputAuth label="Nama Lengkap" placeholder="Nama Lengkap" field="fullName" />
-      <InputAuth label="Tanggal Lahir" placeholder="DD/MM/YYYY" field="birthDate" type="date" />
+      <InputAuth
+        label="Nama Lengkap"
+        placeholder="Nama Lengkap"
+        field="fullName"
+      />
+      <InputAuth
+        label="Tanggal Lahir"
+        placeholder="DD/MM/YYYY"
+        field="birthDate"
+        type="date"
+      />
       <InputAuth label="Domisili" placeholder="Domisili" field="location" />
-      <InputAuth label="No. Telepon" placeholder="No. Telepon" field="phoneNumber" />
+      <InputAuth
+        label="No. Telepon"
+        placeholder="No. Telepon"
+        field="phoneNumber"
+      />
       <button
         type="submit"
         class="w-full flex p-[0.6275rem] justify-center items-center rounded-[1.5rem] bg-[#D62727] min-w-[9.9375rem] text-white font-semibold"
