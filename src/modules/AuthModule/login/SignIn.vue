@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { defineEmits } from 'vue'
 import Logo from '@/assets/images/Logo.vue'
 import InputAuth from '@/components/elements/InputAuth.vue'
 import MessageIcon from '@/assets/images/MessageIcon.vue'
 import LockIcon from '@/assets/images/LockIcon.vue'
 import GoogleButton from '@/components/elements/button/GoogleButton.vue'
+
+const emit = defineEmits(['loginSuccess'])
+
+function handleLogin() {
+  emit('loginSuccess')
+}
 </script>
 
 <template>
@@ -12,15 +19,17 @@ import GoogleButton from '@/components/elements/button/GoogleButton.vue'
     <p class="text-black text-[1.25rem] font-bold tracking-[.0125rem]">
       Sign In
     </p>
-    <form class="flex flex-col w-full gap-5">
+    <form @submit.prevent="handleLogin" class="flex flex-col w-full gap-5">
       <InputAuth
         label="Email"
         placeholder="Masukkan Email"
+        field="email"
         :LeftIcon="MessageIcon"
       />
       <InputAuth
         label="Password"
         placeholder="Masukkan Password"
+        field="password"
         :LeftIcon="LockIcon"
         :rightIcon="true"
       />
@@ -34,7 +43,7 @@ import GoogleButton from '@/components/elements/button/GoogleButton.vue'
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Belum Punya Akun?
-        <a href="/login" class="text-[#D62727]">Daftar</a>
+        <a href="/register" class="text-[#D62727]">Daftar</a>
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>
