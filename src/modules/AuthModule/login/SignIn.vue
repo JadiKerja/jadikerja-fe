@@ -16,11 +16,13 @@ import GoogleButton from '@/components/elements/button/GoogleButton.vue'
       <InputAuth
         label="Email"
         placeholder="Masukkan Email"
+        field="email"
         :LeftIcon="MessageIcon"
       />
       <InputAuth
         label="Password"
         placeholder="Masukkan Password"
+        field="password"
         :LeftIcon="LockIcon"
         :rightIcon="true"
       />
