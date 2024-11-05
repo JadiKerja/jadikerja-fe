@@ -1,8 +1,20 @@
+<script setup lang="ts">
+type SvgProps = {
+  width?: number
+  height?: number
+}
+
+const props = defineProps<SvgProps>()
+
+const defaultWidth = 260
+const defaultHeight = 278
+</script>
+
 <template>
   <svg
-    width="260"
-    height="278"
-    viewBox="0 0 260 278"
+    :width="props.width || defaultWidth"
+    :height="props.height || defaultHeight"
+    :viewBox="`0 0 ${props.width || defaultWidth} ${props.height || defaultHeight}`"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
