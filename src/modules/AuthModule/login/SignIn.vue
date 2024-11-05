@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { defineEmits } from 'vue'
 import Logo from '@/assets/images/Logo.vue'
 import InputAuth from '@/components/elements/InputAuth.vue'
 import MessageIcon from '@/assets/images/MessageIcon.vue'
 import LockIcon from '@/assets/images/LockIcon.vue'
 import GoogleButton from '@/components/elements/button/GoogleButton.vue'
+
+const emit = defineEmits(['loginSuccess'])
+
+function handleLogin() {
+  emit('loginSuccess')
+}
 </script>
 
 <template>
@@ -12,7 +19,7 @@ import GoogleButton from '@/components/elements/button/GoogleButton.vue'
     <p class="text-black text-[1.25rem] font-bold tracking-[.0125rem]">
       Sign In
     </p>
-    <form class="flex flex-col w-full gap-5">
+    <form @submit.prevent="handleLogin" class="flex flex-col w-full gap-5">
       <InputAuth
         label="Email"
         placeholder="Masukkan Email"
