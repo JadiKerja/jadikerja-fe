@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SplashScreen from '@/modules/HomeModule/SplashScreen.vue'
+import IntroPage from '@/modules/HomeModule/IntroPage.vue'
+</script>
 
 <template>
-  <div>Coba doang ini mah</div>
+  <!-- <SplashScreen /> -->
+  <IntroPage />
 </template>
