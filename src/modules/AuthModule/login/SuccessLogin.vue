@@ -7,15 +7,13 @@ import TransparentCircle from '@/components/elements/TransparentCircle.vue'
   <div
     class="w-full relative flex justify-center items-end overflow-hidden h-screen bg-[#D62727]"
   >
-    <p
-      class="text-[2rem] font-semibold text-white absolute bottom-[38rem] left-8"
-    >
+    <p class="text-[2rem] font-semibold text-white absolute top-[3rem] left-8">
       Selamat Datang Kembali
     </p>
     <TransparentCircle
       class="absolute -top-[10rem] -right-[20rem]"
     ></TransparentCircle>
-    <SuccessLoginChar class="absolute bottom-0 right-0" />
+    <SuccessLoginChar class="absolute top-[8rem] right-0" />
     <TransparentCircle
       class="absolute top-[13rem] -left-[11rem]"
     ></TransparentCircle>
