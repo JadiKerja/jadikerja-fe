@@ -7,9 +7,7 @@ import TransparentCircle from '@/components/elements/TransparentCircle.vue'
   <div
     class="w-full relative flex justify-center items-end overflow-hidden h-screen bg-[#D62727]"
   >
-    <p
-      class="text-[2rem] font-semibold text-white absolute top-[3rem] left-8"
-    >
+    <p class="text-[2rem] font-semibold text-white absolute top-[3rem] left-8">
       Selamat Datang Kembali
     </p>
     <TransparentCircle
