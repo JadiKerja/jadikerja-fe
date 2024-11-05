@@ -7,15 +7,14 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import InputImage from '@/components/elements/InputImage.vue'
 import InputAuth from '@/components/elements/InputAuth.vue'
-import BackButton from '@/components/elements/button/BackButton.vue'
 import { uploadFile } from '@/services/postFile'
 
 const profileStore = useProfileStore()
 const authStore = useInputStore()
 const authPiniaStore = useAuthStore()
 const selectedImage = computed(() => profileStore.selectedImage)
-const emit = defineEmits(['back', 'submit'])
 const imageUploadError = ref<string | null>(null)
+const formError = ref<string | null>(null)
 
 function handleFileChange(event: Event) {
   const target = event.target as HTMLInputElement
@@ -27,6 +26,20 @@ function handleFileChange(event: Event) {
 }
 
 async function handleSubmit() {
+  formError.value = null
+  imageUploadError.value = null
+
+  if (
+    !authStore.fullName ||
+    !authStore.birthDate ||
+    !authStore.location ||
+    !authStore.phoneNumber ||
+    !profileStore.selectedImage
+  ) {
+    formError.value = 'Please fill in all fields.'
+    return
+  }
+
   try {
     let imageUrl = null
 
@@ -43,9 +56,6 @@ async function handleSubmit() {
     }
 
     const formData = {
-      email: authStore.email,
-      password: authStore.password,
-      confirmationPassword: authStore.confirmPassword,
       fullName: authStore.fullName,
       birthDate: authStore.birthDate,
       domicile: authStore.location,
@@ -53,16 +63,24 @@ async function handleSubmit() {
       profileUrl: imageUrl,
     }
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/auth/register`,
+    const token = Cookies.get('accessToken')
+    if (!token) {
+      formError.value = 'Authentication error. Please log in again.'
+      return
+    }
+
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}/auth/user`,
       formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     )
-    const { accessToken, user } = response.data.data
+    const { user } = response.data.data
 
-    Cookies.set('accessToken', accessToken)
     authPiniaStore.setUser(user)
-
-    emit('submit')
   } catch (error) {
     console.error('Error submitting profile:', error)
     imageUploadError.value =
@@ -73,7 +91,6 @@ async function handleSubmit() {
 
 <template>
   <div class="flex flex-col w-full min-h-screen items-center py-12 px-7 gap-4">
-    <BackButton @click="emit('back')" class="self-start absolute" />
     <p class="text-black text-[1.25rem] font-bold tracking-[.0125rem]">
       Isi data diri dulu yuk!
     </p>
@@ -84,9 +101,6 @@ async function handleSubmit() {
       @submit.prevent="handleSubmit"
     >
       <InputImage :selectedImage="selectedImage" @change="handleFileChange" />
-      <p v-if="imageUploadError" class="text-red-500 text-sm">
-        {{ imageUploadError }}
-      </p>
 
       <InputAuth
         label="Nama Lengkap"
@@ -106,11 +120,18 @@ async function handleSubmit() {
         field="phoneNumber"
       />
 
+      <p v-if="imageUploadError" class="text-red-500 text-sm">
+        {{ imageUploadError }}
+      </p>
+      <p v-if="formError" class="text-red-500 text-sm">
+        {{ formError }}
+      </p>
+
       <button
         type="submit"
         class="w-full flex p-[0.6275rem] justify-center items-center rounded-[1.5rem] bg-[#D62727] min-w-[9.9375rem] text-white font-semibold"
       >
-        Simpan
+        Simpan Perubahan
       </button>
     </form>
   </div>

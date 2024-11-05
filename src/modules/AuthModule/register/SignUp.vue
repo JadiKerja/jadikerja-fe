@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { defineEmits, ref } from 'vue'
+import { defineEmits, onMounted, ref } from 'vue'
 import { useInputStore } from '@/stores/authStores'
 import Logo from '@/assets/images/Logo.vue'
 import InputAuth from '@/components/elements/InputAuth.vue'
 import MessageIcon from '@/assets/images/MessageIcon.vue'
 import LockIcon from '@/assets/images/LockIcon.vue'
 import GoogleButton from '@/components/elements/button/GoogleButton.vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+
 const emit = defineEmits(['nextStep'])
 const inputStore = useInputStore()
 const errorMessage = ref<string | null>(null)
-
+const router = useRouter()
 function validateAndProceed() {
   errorMessage.value = null
 
@@ -27,6 +28,21 @@ function validateAndProceed() {
     errorMessage.value = null
   }
 }
+
+function clearFields() {
+  inputStore.email = ''
+  inputStore.password = ''
+  inputStore.confirmPassword = ''
+}
+
+onMounted(() => {
+  router.beforeEach((to) => {
+    if (to.path === '/register') {
+      clearFields()
+    }
+    return true
+  })
+})
 </script>
 
 <template>
@@ -58,7 +74,6 @@ function validateAndProceed() {
         :LeftIcon="LockIcon"
         :rightIcon="true"
       />
-      <!-- Error message under confirm password -->
       <p v-if="errorMessage" class="text-red-500 text-sm mt-1">
         {{ errorMessage }}
       </p>
@@ -72,7 +87,9 @@ function validateAndProceed() {
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Sudah Punya Akun?
-        <RouterLink to="/login" class="text-[#D62727]">Masuk</RouterLink>
+        <RouterLink to="/login" @click="clearFields" class="text-[#D62727]"
+          >Masuk</RouterLink
+        >
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>

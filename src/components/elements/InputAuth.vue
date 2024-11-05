@@ -8,7 +8,7 @@ const props = defineProps<{
   label: string
   placeholder: string
   type?: string
-  field: keyof ReturnType<typeof useInputStore>
+  field?: keyof ReturnType<typeof useInputStore>
   LeftIcon?: any
   rightIcon?: boolean
 }>()
