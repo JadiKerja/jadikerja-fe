@@ -34,7 +34,7 @@ import GoogleButton from '@/components/elements/button/GoogleButton.vue'
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Belum Punya Akun?
-        <a href="/login" class="text-[#D62727]">Daftar</a>
+        <a href="/register" class="text-[#D62727]">Daftar</a>
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>
