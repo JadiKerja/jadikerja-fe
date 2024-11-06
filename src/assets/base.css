@@ -14,3 +14,40 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
+.custom-scrollbar::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar-corner {
+  width: 16px;
+  height: 12px;
+  background: #efefefcc;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #efefefcc;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar-corner {
+  width: 16px;
+  height: 12px;
+  background: #efefefcc;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #efefefcc;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: content-box currentColor;
+  border: 2px solid transparent;
+  color: #bfbfbf;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  color: #bfbfbf;
+}
