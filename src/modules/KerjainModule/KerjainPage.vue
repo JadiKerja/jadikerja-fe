@@ -7,6 +7,8 @@ import axios from 'axios'
 import { useAuthStore } from '@/stores/userStores'
 import LoadingCard from './module-elements/InformationCard.vue'
 import BidModal from './module-elements/BidModal.vue'
+import RedBackArrow from '@/assets/images/RedBackArrow.vue'
+import { useRouter } from 'vue-router'
 
 const center = ref({ lat: -6.201326129999445, lng: 106.82317255776235 })
 const markerOptions = ref()
@@ -19,6 +21,11 @@ const isModalOpen = ref(false)
 const selectedKerjainId = ref('')
 
 const userStore = useAuthStore()
+const router = useRouter()
+
+function goBack() {
+  router.back()
+}
 
 onMounted(async () => {
   if (!userStore.user) {
@@ -147,11 +154,15 @@ function handleKeyDown(e) {
   <div
     class="absolute top-10 left-1/2 translate-x-[-50%] flex w-[90%] rounded-[10px] overflow-hidden"
   >
+    <button class="bg-white rounded-full p-3 mr-2" @click="goBack">
+    <RedBackArrow />
+    </button>
+    
     <input
       type="text"
       v-model="search"
       placeholder="Masukkan lokasi"
-      class="w-full outline-none px-3 py-1 font-medium text-xs"
+      class="w-full outline-none px-3 py-1 font-medium text-xs rounded-l-[0.6275rem]"
       @keydown="handleKeyDown"
     />
     <div

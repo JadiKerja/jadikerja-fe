@@ -97,18 +97,26 @@ async function handleSubmit() {
         label="Nama Lengkap"
         placeholder="Nama Lengkap"
         field="fullName"
+        @keyup.enter="handleSubmit"
       />
       <InputAuth
         label="Tanggal Lahir"
         placeholder="DD/MM/YYYY"
         field="birthDate"
         type="date"
+        @keyup.enter="handleSubmit"
       />
-      <InputAuth label="Domisili" placeholder="Domisili" field="location" />
+      <InputAuth
+        label="Domisili"
+        placeholder="Domisili"
+        field="location"
+        @keyup.enter="handleSubmit"
+      />
       <InputAuth
         label="No. Telepon"
         placeholder="No. Telepon"
         field="phoneNumber"
+        @keyup.enter="handleSubmit"
       />
 
       <button
