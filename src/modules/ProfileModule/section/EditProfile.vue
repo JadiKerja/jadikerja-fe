@@ -116,7 +116,7 @@ function goBack() {
 
 <template>
   <div
-    class="flex flex-col relative w-full min-h-screen items-center pb-[6.5rem] pt-12 px-7 gap-4"
+    class="flex flex-col relative w-full min-h-screen items-center pb-[2.5rem] pt-12 px-7 gap-4"
   >
     <BackButton class="self-start absolute" @click="goBack" />
     <p class="text-black text-[1.25rem] font-bold tracking-[.0125rem]">
