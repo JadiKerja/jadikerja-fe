@@ -8,6 +8,8 @@ import ProfileView from '@/views/ProfileView.vue'
 import KerjainView from '../views/KerjainView.vue'
 import EditingProfile from '@/views/profile/EditingProfile.vue'
 import SyaratKetentuanView from '@/views/profile/SyaratKetentuanView.vue'
+import PekerjaanSayaView from '@/views/profile/PekerjaanSayaView.vue'
+import EditPekerjaanView from '@/views/kerjain/EditPekerjaanView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +58,17 @@ const router = createRouter({
       path: '/kerjain',
       name: 'kerjain',
       component: KerjainView,
+    },
+    {
+      path: '/profile/pekerjaan',
+      name: 'pekerjaan saya',
+      component: PekerjaanSayaView,
+    },
+    {
+      path: '/profile/pekerjaan/:id',
+      name: 'detail pekerjaan',
+      component: EditPekerjaanView,
+      props: true,
     },
   ],
 })
