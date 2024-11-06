@@ -23,7 +23,7 @@ function handleFileChange(event: Event) {
     <div
       class="absolute w-full h-full rounded-full"
       :style="{
-        backgroundImage: profileStore.selectedImage
+        backgroundImage: profileStore.selectedImageUrl
           ? `url(${profileStore.selectedImageUrl})`
           : '',
         backgroundSize: 'cover',
@@ -31,12 +31,12 @@ function handleFileChange(event: Event) {
       }"
     >
       <BackgroundProfile
-        v-if="!profileStore.selectedImage"
+        v-if="!profileStore.selectedImageUrl"
         class="w-full h-full"
       />
     </div>
 
-    <IconProfile v-if="!profileStore.selectedImage" class="absolute" />
+    <IconProfile v-if="!profileStore.selectedImageUrl" class="absolute" />
 
     <PenIcon class="absolute bottom-0 right-0 cursor-pointer" />
 
