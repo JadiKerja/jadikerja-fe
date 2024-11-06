@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SuccessLoginChar from '@/assets/images/SuccessLoginChar.vue'
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -28,11 +29,12 @@ import TransparentCircle from '@/components/elements/TransparentCircle.vue'
           Temukan pekerjaan yang sesuai denganmu!
         </p>
       </div>
-      <button
+      <RouterLink
+        to="/beranda"
         class="w-full flex p-[0.6275rem] justify-center items-center rounded-[1.5rem] bg-[#D62727] min-w-[9.9375rem] text-white font-semibold"
       >
         Lanjut ke Beranda
-      </button>
+      </RouterLink>
     </div>
   </div>
 </template>
