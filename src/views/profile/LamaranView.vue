@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LamaranProfile from '@/modules/ProfileModule/section/LamaranProfile.vue';
+import LamaranProfile from '@/modules/ProfileModule/section/LamaranProfile.vue'
 </script>
 
 <template>

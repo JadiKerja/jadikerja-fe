@@ -2,7 +2,7 @@
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import WhiteBackButton from '@/components/elements/button/WhiteBackButton.vue'
 import { useRouter } from 'vue-router'
-import LamaranCard from '@/components/elements/card/LamaranCard.vue';
+import LamaranCard from '@/components/elements/card/LamaranCard.vue'
 
 const router = useRouter()
 
@@ -40,7 +40,7 @@ function goBack() {
     <div
       class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col px-7 py-5 gap-4 z-20 bg-[#F8FAFF] h-fit overflow-y-auto custom-scrollbar-hidden"
     >
-      <LamaranCard 
+      <LamaranCard
         :id="'1'"
         :profile-url="'@/assets/images/tokped-icon.png'"
         :job="'Junior Software Engineer'"
@@ -48,7 +48,7 @@ function goBack() {
         :address="'Setiabudi, Jakarta Selatan, DKI Jakarta'"
         :salary="'3 jt - 4,5 jt'"
       />
-      <LamaranCard 
+      <LamaranCard
         :id="'2'"
         :profile-url="'@/assets/images/tokped-icon.png'"
         :job="'Junior Software Engineer'"
@@ -56,7 +56,7 @@ function goBack() {
         :address="'Setiabudi, Jakarta Selatan, DKI Jakarta'"
         :salary="'3 jt - 4,5 jt'"
       />
-      <LamaranCard 
+      <LamaranCard
         :id="'3'"
         :profile-url="'@/assets/images/tokped-icon.png'"
         :job="'Junior Software Engineer'"
@@ -64,7 +64,7 @@ function goBack() {
         :address="'Setiabudi, Jakarta Selatan, DKI Jakarta'"
         :salary="'3 jt - 4,5 jt'"
       />
-      <LamaranCard 
+      <LamaranCard
         :id="'4'"
         :profile-url="'@/assets/images/tokped-icon.png'"
         :job="'Junior Software Engineer'"
@@ -72,7 +72,7 @@ function goBack() {
         :address="'Setiabudi, Jakarta Selatan, DKI Jakarta'"
         :salary="'3 jt - 4,5 jt'"
       />
-      <LamaranCard 
+      <LamaranCard
         :id="'5'"
         :profile-url="'@/assets/images/tokped-icon.png'"
         :job="'Junior Software Engineer'"
@@ -80,7 +80,7 @@ function goBack() {
         :address="'Setiabudi, Jakarta Selatan, DKI Jakarta'"
         :salary="'3 jt - 4,5 jt'"
       />
-      <LamaranCard 
+      <LamaranCard
         :id="'6'"
         :profile-url="'@/assets/images/tokped-icon.png'"
         :job="'Junior Software Engineer'"
