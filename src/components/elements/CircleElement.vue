@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  isActive: boolean,
-  text: string,
+  isActive: boolean
+  text: string
   desc: string
 }>()
 </script>
@@ -11,8 +11,9 @@ const props = defineProps<{
     <div
       class="w-8 h-8 flex items-center justify-center rounded-full font-semibold"
       :class="{
-        'text-white bg-gradient-to-br from-[#D62727] to-[#E55A24]': props.isActive,
-        'bg-[#D9D9D9] text-[#AEACAC]': !props.isActive
+        'text-white bg-gradient-to-br from-[#D62727] to-[#E55A24]':
+          props.isActive,
+        'bg-[#D9D9D9] text-[#AEACAC]': !props.isActive,
       }"
     >
       {{ props.text }}

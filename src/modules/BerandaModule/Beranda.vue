@@ -15,7 +15,6 @@ onMounted(() => {
 })
 
 console.log(authStore.user)
-
 </script>
 
 <template>
@@ -26,7 +25,10 @@ console.log(authStore.user)
       <p class="text-[1.125rem] text-[#909090] tracking-[.01406rem]">
         Selamat datang,
       </p>
-      <p class="text-[1.5rem] text-[#0A0E32] font-bold tracking-[.01875rem]" v-if="authStore.user">
+      <p
+        class="text-[1.5rem] text-[#0A0E32] font-bold tracking-[.01875rem]"
+        v-if="authStore.user"
+      >
         {{ authStore.user.client.fullName }}
       </p>
     </div>

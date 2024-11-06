@@ -46,28 +46,22 @@ const canProceed = computed(() => {
     >
       <ProgressIcon :pageNumber="2" />
       <div class="flex flex-col gap-1">
-        <p class="text-black text-[1.25rem] font-semibold">
-          Informasi Diri
-        </p>
+        <p class="text-black text-[1.25rem] font-semibold">Informasi Diri</p>
         <p class="text-black text-[0.75rem]">
           Isi informasi untuk memudahkan mitra
         </p>
       </div>
       <div class="flex flex-col gap-4">
-        <InputKerjain 
-          label="Nama"
-          placeholder="Masukkan Nama"
-          field="name"
-        />
-        <InputKerjain 
+        <InputKerjain label="Nama" placeholder="Masukkan Nama" field="name" />
+        <InputKerjain
           label="Nomor Telepon"
           placeholder="Masukkan Nomor Telepon"
           field="phoneNumber"
         />
       </div>
 
-      <button 
-        @click="emit('next')" 
+      <button
+        @click="emit('next')"
         :disabled="!canProceed"
         class="w-full py-[0.8125rem] text-white bg-[#D62727] text-center font-semibold rounded-[0.9375rem] disabled:bg-gray-400"
       >

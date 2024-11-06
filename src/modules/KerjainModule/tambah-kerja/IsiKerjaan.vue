@@ -16,7 +16,9 @@ function goBack() {
 }
 
 const canProceed = computed(() => {
-  return kerjainStore.detailAddress && kerjainStore.jobType && kerjainStore.price
+  return (
+    kerjainStore.detailAddress && kerjainStore.jobType && kerjainStore.price
+  )
 })
 </script>
 
@@ -51,17 +53,13 @@ const canProceed = computed(() => {
     >
       <ProgressIcon :pageNumber="1" />
       <div class="flex flex-col gap-1">
-        <p class="text-black text-[1.25rem] font-semibold">
-          Tambah Kerjaan
-        </p>
+        <p class="text-black text-[1.25rem] font-semibold">Tambah Kerjaan</p>
         <p class="text-black text-[0.75rem]">
           Pekerjaan apa yang mitra kami bisa bantu?
         </p>
       </div>
       <div class="w-full">
-        <p class="text-[0.875rem] text-black font-semibold">
-          Alamat
-        </p>
+        <p class="text-[0.875rem] text-black font-semibold">Alamat</p>
       </div>
       <div class="flex flex-col gap-4">
         <InputKerjain

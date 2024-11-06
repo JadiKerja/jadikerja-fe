@@ -33,27 +33,27 @@ const fieldPrefix = computed(() => {
 
 <template>
   <div class="flex flex-col items-start gap-[0.3125rem] w-full">
-    <p class="text-[0.875rem] text-black font-semibold tracking-[.0125rem]">{{ label }}</p>
+    <p class="text-[0.875rem] text-black font-semibold tracking-[.0125rem]">
+      {{ label }}
+    </p>
     <div class="relative w-full items-center flex gap-4">
-      <component
-        :color="iconColor"
-        class="absolute left-4"
-      />
-      
-      <p
-        v-if="fieldPrefix"
-        class="absolute left-4 text-black font-semibold"
-      >
+      <component :color="iconColor" class="absolute left-4" />
+
+      <p v-if="fieldPrefix" class="absolute left-4 text-black font-semibold">
         {{ fieldPrefix }}
       </p>
 
       <input
         v-model="kerjainStore[props.field]"
         :placeholder="placeholder"
-        :class="[ 
+        :class="[
           'pr-4 border-[1.506px] border-solid py-4 rounded-[0.6275rem] flex items-center bg-white w-full text-black placeholder:text-[#AEACAC]',
           borderColor,
-          props.field === 'phoneNumber' ? 'pl-16' : props.field === 'price' ? 'pl-10' : 'pl-4'
+          props.field === 'phoneNumber'
+            ? 'pl-16'
+            : props.field === 'price'
+              ? 'pl-10'
+              : 'pl-4',
         ]"
         @focus="isFocused = true"
         @blur="isFocused = false"

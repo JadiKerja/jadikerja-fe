@@ -24,7 +24,6 @@ function goBackToRoute() {
 function goToIsiKerjaan() {
   step.value = 1
 }
-
 </script>
 
 <template>
@@ -36,7 +35,11 @@ function goToIsiKerjaan() {
       <DataDiriKerjaan @next="goToNextStep" @back="goToPreviousStep" />
     </template>
     <template v-else-if="step === 3">
-      <KonfirmasiKerjaan @next="goToNextStep" @back="goToPreviousStep" @editIsiKerjaan="goToIsiKerjaan" />
+      <KonfirmasiKerjaan
+        @next="goToNextStep"
+        @back="goToPreviousStep"
+        @editIsiKerjaan="goToIsiKerjaan"
+      />
     </template>
     <template v-else-if="step === 4">
       <SuccessAddKerjaan />

@@ -82,7 +82,6 @@ const router = createRouter({
       name: 'add kerjain',
       component: AddKerjainView,
     },
-
   ],
 })
 
