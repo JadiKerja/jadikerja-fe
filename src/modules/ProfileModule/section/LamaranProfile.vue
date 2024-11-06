@@ -91,14 +91,3 @@ function goBack() {
     </div>
   </div>
 </template>
-
-<style scoped>
-.custom-scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-.custom-scrollbar-hidden {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>

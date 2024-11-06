@@ -1,9 +1,5 @@
-<script setup lang="ts">
-import PekerjaanProfile from '@/modules/ProfileModule/section/PekerjaanProfile.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-[#F8FAFF]">
-    <PekerjaanProfile />
-  </div>
+  <div class="min-h-screen flex flex-col bg-[#F8FAFF]"></div>
 </template>
