@@ -12,7 +12,10 @@ import LogoutIcon from '@/assets/images/LogoutIcon.vue'
 import Cookies from 'js-cookie'
 
 const profileStore = useAuthStore()
-const profileImageUrl = computed(() => profileStore.user.client.profileUrl)
+const profileImageUrl = computed(
+  () => profileStore.user?.client?.profileUrl || '',
+)
+const fullName = computed(() => profileStore.user?.client?.fullName || 'Guest')
 
 function handleLogout() {
   profileStore.setUser(null)
@@ -32,10 +35,10 @@ function handleLogout() {
         class="absolute -top-[3rem] -right-[5rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]"
       />
       <TransparentCircle
-        class="absolute top-[10rem] -left-[7rem] bg-[#E55A24B2] w-[10.66975rem] h-[10.66975rem]"
+        class="absolute -bottom-[2rem] -left-[7rem] bg-[#E55A24B2] w-[10.66975rem] h-[10.66975rem]"
       />
       <TransparentCircle
-        class="absolute top-[12rem] -left-[6rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]"
+        class="absolute -bottom-[3rem] -left-[5rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]"
       />
 
       <p class="text-[1.75rem] font-bold text-white tracking-[0.02188rem]">
@@ -57,7 +60,7 @@ function handleLogout() {
         </div>
       </div>
       <p class="text-[1.25rem] font-semibold tracking-[.01563rem] text-white">
-        {{ profileStore.user.client.fullName }}
+        {{ fullName }}
       </p>
     </div>
     <div

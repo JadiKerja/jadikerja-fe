@@ -12,6 +12,7 @@ export const useProfileStore = defineStore('profile', () => {
 
   function clearSelectedImage() {
     selectedImage.value = null
+    selectedImageUrl.value = null
   }
 
   return {

@@ -12,11 +12,11 @@ import { RouterLink } from 'vue-router'
       Selamat Datang Kembali
     </p>
     <TransparentCircle
-      class="absolute -top-[10rem] -right-[20rem]"
+      class="absolute -top-[10rem] -right-[20rem] w-[27.125rem] h-[27.125rem] bg-[#FFFFFF12]"
     ></TransparentCircle>
     <SuccessLoginChar class="absolute top-[8rem] right-0" />
     <TransparentCircle
-      class="absolute top-[13rem] -left-[11rem]"
+      class="absolute top-[13rem] -left-[11rem] w-[27.125rem] h-[27.125rem] bg-[#FFFFFF12]"
     ></TransparentCircle>
     <div
       class="rounded-t-[2.9475rem] w-full bg-white flex flex-col items-center gap-[1.25rem] pt-[2.5rem] pb-[4.5rem] px-[3rem] z-10"

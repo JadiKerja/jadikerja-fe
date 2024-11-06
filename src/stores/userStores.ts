@@ -34,21 +34,19 @@ export const useAuthStore = defineStore('auth', () => {
   const isLoggedIn = computed(() => !!user.value)
 
   async function fetchUserData() {
-    const token = Cookies.get('accessToken')
-
-    if (token) {
+    if (accessToken.value) {
       isLoading.value = true
       try {
         const response = await axios.get(
           `${import.meta.env.VUE_APP_API_URL}/auth/user`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${accessToken.value}`,
             },
           },
         )
 
-        if (response.data) {
+        if (response.data.data) {
           user.value = response.data.data.user as User
         }
       } catch (error) {
@@ -60,7 +58,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function setUser(userData: User) {
+  function setUser(userData: User | null) {
     user.value = userData
   }
 
