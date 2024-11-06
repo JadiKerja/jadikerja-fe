@@ -8,7 +8,7 @@ import TransparentCircle from '@/components/elements/TransparentCircle.vue'
     class="w-full relative flex justify-center items-end h-screen bg-[#D62727]"
   >
     <TransparentCircle
-      class="absolute top-[13rem] -left-[11rem]"
+      class="absolute top-[13rem] -left-[11rem] w-[27.125rem] h-[27.125rem] bg-[#FFFFFF12]"
     ></TransparentCircle>
     <SuccessRegisChar class="absolute top-8 right-5" />
     <div
