@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { ref, computed, watchEffect } from 'vue'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { useRouter } from 'vue-router'
 
 enum Role {
   Client = 'CLIENT',
@@ -36,6 +36,7 @@ export const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async fetchUserData() {
+      const router = useRouter()  // Initialize router here
       if (this.accessToken) {
         this.isLoading = true
 
@@ -54,61 +55,17 @@ export const useAuthStore = defineStore('auth', {
         } catch (error) {
           console.error('Failed to fetch user data', error)
           this.user = null
+          router.push('/login')
         } finally {
           this.isLoading = false
         }
+      } else {
+        router.push('/login')
       }
     },
 
-    setUser(user) {
+    setUser(user: User | null) {
       this.user = user
     },
   },
 })
-
-// export const useAuthStore = defineStore('auth', () => {
-//   const user = ref<User | null>(null)
-//   const accessToken = Cookies.get('accessToken')
-//   const isLoading = ref(false)
-//   const hasFetched = ref(false) // Flag to indicate if data has been fetched
-//   const isLoggedIn = computed(() => !!user.value)
-
-//   async function fetchUserData() {
-//     if (accessToken && !hasFetched.value) { // Check if data hasn't been fetched
-//       isLoading.value = true
-//       try {
-//         const response = await axios.get(
-//           `${import.meta.env.VITE_API_URL}/auth/user`,
-//           {
-//             headers: {
-//               Authorization: `Bearer ${accessToken}`,
-//             },
-//           },
-//         )
-//         if (response.data.data) {
-//           user.value = response.data.data.user as User
-//           hasFetched.value = true // Set the flag after fetching data
-//         }
-//       } catch (error) {
-//         console.error('Failed to fetch user data', error)
-//         user.value = null
-//       } finally {
-//         isLoading.value = false
-//       }
-//     }
-//   }
-
-//   // Automatically call fetchUserData whenever this store is accessed
-//   watchEffect(() => {
-//     if (!hasFetched.value) {
-//       fetchUserData()
-//     }
-//   })
-
-//   function setUser(userData: User | null) {
-//     user.value = userData
-//     hasFetched.value = true // Update the flag when setting user manually
-//   }
-
-//   return { user, isLoading, isLoggedIn, fetchUserData, setUser }
-// })
