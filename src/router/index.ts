@@ -11,6 +11,7 @@ import SyaratKetentuanView from '@/views/profile/SyaratKetentuanView.vue'
 import PekerjaanSayaView from '@/views/profile/PekerjaanSayaView.vue'
 import EditPekerjaanView from '@/views/kerjain/EditPekerjaanView.vue'
 import LamaranView from '@/views/profile/LamaranView.vue'
+import KerjainChatView from '../views/kerjain/KerjainChatView.vue'
 import AddKerjainView from '@/views/kerjain/AddKerjainView.vue'
 
 const router = createRouter({
@@ -76,6 +77,12 @@ const router = createRouter({
       path: '/profile/lamaran',
       name: 'lamaran saya',
       component: LamaranView,
+    },
+    {
+      path: '/kerjain/chat/:id',
+      name: 'chat kerjain',
+      component: KerjainChatView,
+      props: true,
     },
     {
       path: '/kerjain/add',
