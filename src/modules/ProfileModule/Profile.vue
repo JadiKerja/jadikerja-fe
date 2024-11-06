@@ -57,12 +57,17 @@ function handleLogout() {
         <div
           class="absolute w-full h-full rounded-full"
           :style="{
-            backgroundImage: profileStore.user?.client?.profileUrl ? `url(${profileStore.user?.client?.profileUrl})` : '',
+            backgroundImage: profileStore.user?.client?.profileUrl
+              ? `url(${profileStore.user?.client?.profileUrl})`
+              : '',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }"
         >
-          <IconProfile v-if="!profileStore.user?.client?.profileUrl" class="w-full h-full" />
+          <IconProfile
+            v-if="!profileStore.user?.client?.profileUrl"
+            class="w-full h-full"
+          />
         </div>
       </div>
       <p class="text-[1.25rem] font-semibold tracking-[.01563rem] text-white">
