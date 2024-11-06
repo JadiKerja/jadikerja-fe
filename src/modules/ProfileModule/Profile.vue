@@ -12,16 +12,12 @@ import LogoutIcon from '@/assets/images/LogoutIcon.vue'
 import Cookies from 'js-cookie'
 
 const profileStore = useAuthStore()
-// const profileImageUrl = ref(profileStore.user?.client?.profileUrl || '')
-// const fullName = ref(profileStore.user?.client?.fullName || 'Guest')
 
 onMounted(() => {
   if (!profileStore.user) {
     profileStore.fetchUserData()
   }
 })
-
-console.log(profileStore.user)
 
 function handleLogout() {
   profileStore.setUser(null)

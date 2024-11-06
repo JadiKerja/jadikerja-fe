@@ -11,6 +11,7 @@ import SyaratKetentuanView from '@/views/profile/SyaratKetentuanView.vue'
 import PekerjaanSayaView from '@/views/profile/PekerjaanSayaView.vue'
 import EditPekerjaanView from '@/views/kerjain/EditPekerjaanView.vue'
 import LamaranView from '@/views/profile/LamaranView.vue'
+import AddKerjainView from '@/views/kerjain/AddKerjainView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -76,6 +77,12 @@ const router = createRouter({
       name: 'lamaran saya',
       component: LamaranView,
     },
+    {
+      path: '/kerjain/add',
+      name: 'add kerjain',
+      component: AddKerjainView,
+    },
+
   ],
 })
 
