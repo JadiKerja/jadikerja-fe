@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PekerjaanProfile from '@/modules/ProfileModule/section/PekerjaanProfile.vue';
+import PekerjaanProfile from '@/modules/ProfileModule/section/PekerjaanProfile.vue'
 </script>
 
 <template>

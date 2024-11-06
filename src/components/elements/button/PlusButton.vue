@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PlusIcon from '@/assets/images/PlusIcon.vue';
+import PlusIcon from '@/assets/images/PlusIcon.vue'
 </script>
 
 <template>

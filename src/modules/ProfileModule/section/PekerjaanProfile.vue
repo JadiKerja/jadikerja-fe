@@ -12,11 +12,14 @@ const pekerjaanList = ref([])
 async function fetchPekerjaan() {
   const accessToken = Cookies.get('accessToken')
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/kerjain/author`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/kerjain/author`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-    })
+    )
     console.log(response.data.data)
     pekerjaanList.value = response.data.data.kerjain
   } catch (error) {
@@ -34,15 +37,19 @@ function goBack() {
 <template>
   <div class="flex flex-col p-7 gap-8">
     <div class="flex flex-row justify-between items-center">
-      <BackButton class="self-start " @click="goBack" />
+      <BackButton class="self-start" @click="goBack" />
       <p class="text-[#0A0E32] text-[1.5rem] font-bold tracking-[.01875rem]">
         Daftar Pekerjaan
       </p>
       <div></div>
     </div>
-    
-    <div v-for="pekerjaan in pekerjaanList" :key="pekerjaan.id" class="flex flex-col gap-3">
-      <KerjainCard 
+
+    <div
+      v-for="pekerjaan in pekerjaanList"
+      :key="pekerjaan.id"
+      class="flex flex-col gap-3"
+    >
+      <KerjainCard
         :id="pekerjaan.id"
         :title="pekerjaan.title"
         :lat="pekerjaan.lat"

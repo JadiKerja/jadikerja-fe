@@ -15,9 +15,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 px-3 py-5 rounded-[0.9375rem] bg-white w-full">
+  <div
+    class="flex flex-col gap-4 px-3 py-5 rounded-[0.9375rem] bg-white w-full"
+  >
     <div class="flex flex-row gap-4">
-      <img :src="profileUrl" :alt="name" class="w-16 h-16">
+      <img :src="profileUrl" :alt="name" class="w-16 h-16" />
       <div class="flex flex-col gap-1">
         <p class="text-black text-[0.875rem] font-semibold">
           {{ props.job }}
@@ -26,7 +28,7 @@ const props = defineProps({
           <p class="text-[0.625rem] font-medium text-black">
             {{ props.name }}
           </p>
-          <p class="text-[0.5rem] text-black font-light ">
+          <p class="text-[0.5rem] text-black font-light">
             {{ props.address }}
           </p>
         </div>
