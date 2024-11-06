@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from '@/components/elements/Navbar.vue'
-import EditProfile from '@/modules/ProfileModule/section/EditProfile.vue';
+import EditProfile from '@/modules/ProfileModule/section/EditProfile.vue'
 </script>
 
 <template>

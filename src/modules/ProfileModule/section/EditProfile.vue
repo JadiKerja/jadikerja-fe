@@ -59,15 +59,14 @@ async function handleSubmit() {
 
   try {
     let imageUrl = null
-    if(profileStore.selectedImage) {
-  
+    if (profileStore.selectedImage) {
       if (profileStore.selectedImage instanceof File) {
         imageUrl = await uploadFile({
           file: profileStore.selectedImage,
           folder: 'profile_pictures',
         })
       }
-  
+
       if (!imageUrl) {
         imageUploadError.value = 'Failed to upload image. Please try again.'
         return
@@ -79,7 +78,7 @@ async function handleSubmit() {
       birthDate: authStore.birthDate,
       domicile: authStore.location,
       phone: authStore.phoneNumber,
-      profileUrl: (imageUrl ? imageUrl : profileStore.selectedImageUrl ),
+      profileUrl: imageUrl ? imageUrl : profileStore.selectedImageUrl,
     }
 
     const token = Cookies.get('accessToken')
@@ -116,7 +115,9 @@ function goBack() {
 </script>
 
 <template>
-  <div class="flex flex-col relative w-full min-h-screen items-center pb-[6.5rem] pt-12 px-7 gap-4">
+  <div
+    class="flex flex-col relative w-full min-h-screen items-center pb-[6.5rem] pt-12 px-7 gap-4"
+  >
     <BackButton class="self-start absolute" @click="goBack" />
     <p class="text-black text-[1.25rem] font-bold tracking-[.0125rem]">
       Edit Akun
