@@ -46,7 +46,7 @@ const emit = defineEmits(['next', 'back'])
         Kembali ke Beranda
       </RouterLink>
       <RouterLink
-        to="/profile/kerjaan"
+        to="/profile/pekerjaan"
         class="w-full rounded-[1.47825rem] bg-[#F4A91E] text-white py-4 flex justify-center text-[1.25rem] font-semibold text-center"
       >
         Lihat Daftar Pekerjaan

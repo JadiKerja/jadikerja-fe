@@ -50,10 +50,42 @@ async function handleGoogleLogin() {
 </script>
 
 <template>
-  <button @click="handleGoogleLogin" :disabled="isLoading">
-    <GoogleIcon />
+  <button 
+    @click="handleGoogleLogin" 
+    :disabled="isLoading"
+    class="flex items-center justify-center "
+  >
+    <template v-if="!isLoading">
+      <GoogleIcon />
+    </template>
+    <template v-else>
+      <div class="flex items-center justify-center">
+        <div class="loader"></div> 
+        <span class="text-sm font-semibold ml-2">Loading...</span>
+      </div>
+    </template>
   </button>
   <p v-if="errorMessage" class="text-red-500 text-sm mt-2">
     {{ errorMessage }}
   </p>
 </template>
+
+<style scoped>
+.loader {
+  border: 4px solid transparent;
+  border-top-color: #D62727;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

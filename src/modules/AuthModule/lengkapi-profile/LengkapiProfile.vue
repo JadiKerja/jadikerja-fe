@@ -15,6 +15,7 @@ const authPiniaStore = useAuthStore()
 const selectedImage = computed(() => profileStore.selectedImage)
 const imageUploadError = ref<string | null>(null)
 const formError = ref<string | null>(null)
+const isSubmitting = ref(false)
 const emit = defineEmits(['loginSuccess'])
 
 function handleFileChange(event: Event) {
@@ -29,6 +30,7 @@ function handleFileChange(event: Event) {
 async function handleSubmit() {
   formError.value = null
   imageUploadError.value = null
+  isSubmitting.value = true
 
   if (
     !authStore.fullName ||
@@ -38,6 +40,7 @@ async function handleSubmit() {
     !profileStore.selectedImage
   ) {
     formError.value = 'Please fill in all fields.'
+    isSubmitting.value = false 
     return
   }
 
@@ -53,6 +56,7 @@ async function handleSubmit() {
 
     if (!imageUrl) {
       imageUploadError.value = 'Failed to upload image. Please try again.'
+      isSubmitting.value = false 
       return
     }
 
@@ -67,6 +71,7 @@ async function handleSubmit() {
     const token = Cookies.get('accessToken')
     if (!token) {
       formError.value = 'Authentication error. Please log in again.'
+      isSubmitting.value = false 
       return
     }
 
@@ -89,6 +94,8 @@ async function handleSubmit() {
     console.error('Error submitting profile:', error)
     imageUploadError.value =
       'An error occurred during submission. Please try again.'
+  } finally {
+    isSubmitting.value = false 
   }
 }
 </script>
@@ -134,9 +141,31 @@ async function handleSubmit() {
       <button
         type="submit"
         class="w-full flex p-[0.6275rem] justify-center items-center rounded-[1.5rem] bg-[#D62727] min-w-[9.9375rem] text-white font-semibold"
+        :disabled="isSubmitting"
       >
-        Simpan Perubahan
+        <span v-if="!isSubmitting">Simpan Perubahan</span>
+        <div v-else class="loader"></div>
       </button>
     </form>
   </div>
 </template>
+
+<style scoped>
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ffffff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
-import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/userStores'
 import SearchInput from '@/components/elements/SearchInput.vue'
 import TwoUserIcon from '@/assets/images/TwoUserIcon.vue'
@@ -12,16 +12,21 @@ import upgradeImage2 from '@/assets/images/upgrade-diri-2.png'
 import upgradeImage3 from '@/assets/images/upgrade-diri-3.png'
 
 const profileStore = useAuthStore()
+const isLoading = ref(true)
 
-onMounted(() => {
+onMounted(async () => {
   if (!profileStore.user) {
-    profileStore.fetchUserData()
+    await profileStore.fetchUserData()
   }
+  isLoading.value = false
 })
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col items-center w-full">
+  <div v-if="isLoading" class="min-h-screen flex justify-center items-center">
+    <div class="loader"></div>
+  </div>
+  <div v-else class="min-h-screen flex flex-col items-center w-full">
     <div
       class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full py-8 px-7 gap-6 overflow-hidden"
     >
@@ -96,3 +101,23 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #D62727;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

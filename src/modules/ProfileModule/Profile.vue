@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import IconProfile from '@/assets/images/IconProfile.vue'
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/userStores'
 import { RouterLink } from 'vue-router'
 import EditProfileIcon from '@/assets/images/EditProfileIcon.vue'
@@ -12,11 +12,13 @@ import LogoutIcon from '@/assets/images/LogoutIcon.vue'
 import Cookies from 'js-cookie'
 
 const profileStore = useAuthStore()
+const isLoading = ref(true)
 
-onMounted(() => {
+onMounted(async () => {
   if (!profileStore.user) {
-    profileStore.fetchUserData()
+    await profileStore.fetchUserData()
   }
+  isLoading.value = false
 })
 
 function handleLogout() {
@@ -26,7 +28,10 @@ function handleLogout() {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col items-center w-full">
+  <div v-if="isLoading" class="min-h-screen flex justify-center items-center">
+    <div class="loader"></div>
+  </div>
+  <div v-else class="min-h-screen flex flex-col items-center w-full">
     <div
       class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full pt-6 pb-[2.5rem] gap-6 overflow-hidden"
     >
@@ -43,12 +48,12 @@ function handleLogout() {
         class="absolute -bottom-[3rem] -left-[5rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]"
       />
 
-      <p class="text-[1.75rem] font-bold text-white tracking-[0.02188rem]">
+      <p class="text-[1.75rem] font-bold text-white tracking-[0.02188rem] z-10">
         Profil Akun
       </p>
 
       <div
-        class="flex relative items-center justify-center w-[5.9375rem] h-[6.1875rem] mt-4"
+        class="flex relative items-center justify-center w-[5.9375rem] h-[6.1875rem] mt-4 z-10"
       >
         <div
           class="absolute w-full h-full rounded-full"
@@ -66,7 +71,7 @@ function handleLogout() {
           />
         </div>
       </div>
-      <p class="text-[1.25rem] font-semibold tracking-[.01563rem] text-white">
+      <p class="text-[1.25rem] font-semibold tracking-[.01563rem] text-white z-10">
         {{ profileStore.user?.client?.fullName ?? 'Guest' }}
       </p>
     </div>
@@ -109,3 +114,23 @@ function handleLogout() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #D62727;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
