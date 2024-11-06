@@ -1,24 +1,32 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
-import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/userStores'
 import SearchInput from '@/components/elements/SearchInput.vue'
 import TwoUserIcon from '@/assets/images/TwoUserIcon.vue'
 import { RouterLink } from 'vue-router'
 import WhiteRobot from '@/components/elements/WhiteRobot.vue'
 import UpgradeDiriCard from '@/components/elements/card/UpgradeDiriCard.vue'
+import upgradeImage1 from '@/assets/images/upgrade-diri-1.png'
+import upgradeImage2 from '@/assets/images/upgrade-diri-2.png'
+import upgradeImage3 from '@/assets/images/upgrade-diri-3.png'
 
 const profileStore = useAuthStore()
+const isLoading = ref(true)
 
-onMounted(() => {
+onMounted(async () => {
   if (!profileStore.user) {
-    profileStore.fetchUserData()
+    await profileStore.fetchUserData()
   }
+  isLoading.value = false
 })
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col items-center w-full">
+  <div v-if="isLoading" class="min-h-screen flex justify-center items-center">
+    <div class="loader"></div>
+  </div>
+  <div v-else class="min-h-screen flex flex-col items-center w-full">
     <div
       class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full py-8 px-7 gap-6 overflow-hidden"
     >
@@ -70,20 +78,46 @@ onMounted(() => {
           :title="'Belajar Pemrograman Web'"
           :desc="'Menjadi Pengembang Web Full-Stack hanya dengan SATU kursus. HTML, CSS, JavaScript, Node, React, PostgreSQL, Web3, dan DApps.'"
           :name="'Dr. Siti Zubaedah, Developer and Lecturer'"
+          :imgSrc="upgradeImage1"
+          :url="'https://www.udemy.com/course/the-complete-web-development-bootcamp'"
         />
         <UpgradeDiriCard
           :id="'2'"
           :title="'Belajar Digital Marketing'"
           :desc="'Strategi Pemasaran Digital, Pemasaran Media Sosial, WordPress, SEO, ChatGPT, Email, Instagram, Facebook, YouTube, iklan'"
-          :name="'Dr. Joni marjoni, Marketeer and Lecturer'"
+          :name="'Dr. Joni Marjoni, Marketeer and Lecturer'"
+          :imgSrc="upgradeImage2"
+          :url="'https://www.udemy.com/course/digital-marketing-strategy-course-wordpress-seo-instagram-facebook'"
         />
         <UpgradeDiriCard
           :id="'3'"
           :title="'Belajar Masak Steak Ayam'"
           :desc="'Belajar memasak bersama saya - Saya senang mengajar memasak kepada murid-murid saya'"
           :name="'Rini Yuliana Marsudini, Chef at Abuba Steak'"
+          :imgSrc="upgradeImage3"
+          :url="'https://www.udemy.com/course/master-chef-cooking-course-12-episodes'"
         />
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #d62727;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

@@ -1,18 +1,35 @@
 <script setup lang="ts">
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import WhiteBackButton from '@/components/elements/button/WhiteBackButton.vue'
-import { useRouter } from 'vue-router'
 import LamaranCard from '@/components/elements/card/LamaranCard.vue'
+import { useAuthStore } from '@/stores/userStores'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const authStore = useAuthStore()
+const isLoading = ref(true)
 
 function goBack() {
   router.back()
 }
+
+onMounted(() => {
+  if (!authStore.user) {
+    authStore.fetchUserData().finally(() => {
+      isLoading.value = false
+    })
+  } else {
+    isLoading.value = false
+  }
+})
 </script>
 
 <template>
-  <div class="h-screen flex flex-col items-center w-full">
+  <div v-if="isLoading" class="flex justify-center items-center min-h-screen">
+    <div class="loader"></div>
+  </div>
+  <div v-else class="h-screen flex flex-col items-center w-full">
     <div
       class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full pb-[4.5rem] pt-[3rem] px-7 gap-6 overflow-hidden"
     >
@@ -91,3 +108,23 @@ function goBack() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #d62727;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
