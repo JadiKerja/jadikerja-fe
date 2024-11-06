@@ -19,11 +19,7 @@ function openUrl() {
   <div
     class="rounded-[0.9375rem] bg-white flex flex-row p-[0.625rem] shadow-sm gap-2 items-center"
   >
-    <img
-      :src="imgSrc"
-      alt="Photo"
-      class="w-[9.87425rem] h-[5.43413rem]"
-    />
+    <img :src="imgSrc" alt="Photo" class="w-[9.87425rem] h-[5.43413rem]" />
     <div class="flex flex-col gap-[0.375rem]">
       <p class="text-black text-[0.625rem] font-medium">
         {{ props.title }}
