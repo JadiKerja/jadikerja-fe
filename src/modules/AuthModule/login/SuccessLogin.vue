@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SuccessLoginChar from '@/assets/images/SuccessLoginChar.vue'
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>

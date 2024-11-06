@@ -1,16 +1,22 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 const props = defineProps({
   color: {
     type: String,
     default: '#C8CED7',
   },
-});
+})
 </script>
 
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 20 24" fill="none">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="24"
+    viewBox="0 0 20 24"
+    fill="none"
+  >
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"

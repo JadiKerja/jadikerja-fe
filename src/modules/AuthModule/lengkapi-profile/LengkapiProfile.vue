@@ -80,12 +80,11 @@ async function handleSubmit() {
       },
     )
 
-    if(response.data.code === 200) {
+    if (response.data.code === 200) {
       const { user } = response.data.data
       authPiniaStore.setUser(user)
       emit('loginSuccess')
     }
-
   } catch (error) {
     console.error('Error submitting profile:', error)
     imageUploadError.value =
