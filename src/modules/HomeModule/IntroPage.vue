@@ -11,27 +11,23 @@ import ThirdCharIntro from '@/assets/images/ThirdCharIntro.vue'
 const activeIndex = ref(1)
 const router = useRouter()
 
-const paragraphText = ref(
-  'Cari Kerjaanmu Disini!',
-)
+const paragraphText = ref('Cari Kerjaanmu Disini!')
 
-const descriptionText = ref (
-  'Cari pekerjaan impianmu dengan JadiKerja, platform terpercaya untuk berbagai peluang kerja!'
+const descriptionText = ref(
+  'Cari pekerjaan impianmu dengan JadiKerja, platform terpercaya untuk berbagai peluang kerja!',
 )
 
 const updateActiveIndex = () => {
   if (activeIndex.value < 3) {
     activeIndex.value += 1
     if (activeIndex.value === 2) {
-      paragraphText.value =
-        'Raih Peluang Kerja Sesuai Kualifikasi!'
+      paragraphText.value = 'Raih Peluang Kerja Sesuai Kualifikasi!'
       descriptionText.value =
         'JadiKerja membantu kamu menemukan pekerjaan yang sesuai dengan bakat dan kebutuhanmu.'
-      } else if (activeIndex.value === 3) {
-        paragraphText.value =
-        'Berbagai Pilihan Kerja Menantimu di JadiKerja!'
-        descriptionText.value =
-          'Mulai perjalanan karirmu dengan peluang kerja yang beragam dan sesuai keinginanmu.'
+    } else if (activeIndex.value === 3) {
+      paragraphText.value = 'Berbagai Pilihan Kerja Menantimu di JadiKerja!'
+      descriptionText.value =
+        'Mulai perjalanan karirmu dengan peluang kerja yang beragam dan sesuai keinginanmu.'
     }
   } else {
     router.push('/login')
@@ -47,7 +43,6 @@ const currentCharacter = computed(() => {
   if (activeIndex.value === 2) return SecondCharIntro
   if (activeIndex.value === 3) return ThirdCharIntro
 })
-
 </script>
 
 <template>
@@ -57,8 +52,14 @@ const currentCharacter = computed(() => {
       class="rounded-t-[2.9475rem] w-full bg-white flex flex-col items-center gap-[1.5rem] py-[2.5rem] px-6 z-10"
     >
       <div class="flex flex-col gap-4">
-        <p class="text-[#0E1446] text-center text-[1.625rem] font-bold tracking-[0.02031rem]">{{ paragraphText }}</p>
-        <p class="text-[#B7B7B7] text-center font-medium tracking-[.0125rem]">{{ descriptionText }}</p>
+        <p
+          class="text-[#0E1446] text-center text-[1.625rem] font-bold tracking-[0.02031rem]"
+        >
+          {{ paragraphText }}
+        </p>
+        <p class="text-[#B7B7B7] text-center font-medium tracking-[.0125rem]">
+          {{ descriptionText }}
+        </p>
       </div>
       <Indicator
         :activeIndex="activeIndex"
