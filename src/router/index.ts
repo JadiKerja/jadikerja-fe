@@ -13,6 +13,8 @@ import EditPekerjaanView from '@/views/kerjain/EditPekerjaanView.vue'
 import LamaranView from '@/views/profile/LamaranView.vue'
 import KerjainChatView from '../views/kerjain/KerjainChatView.vue'
 import AddKerjainView from '@/views/kerjain/AddKerjainView.vue'
+import CariKerjaView from '@/views/CariKerjaView.vue'
+import UpgradeDiriView from '@/views/UpgradeDiriView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -88,6 +90,16 @@ const router = createRouter({
       path: '/kerjain/add',
       name: 'add kerjain',
       component: AddKerjainView,
+    },
+    {
+      path: '/carikerja',
+      name: 'cari kerja',
+      component: CariKerjaView,
+    },
+    {
+      path: '/upgrade',
+      name: 'upgrade diri',
+      component: UpgradeDiriView,
     },
   ],
 })
