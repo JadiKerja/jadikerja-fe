@@ -15,6 +15,7 @@ const authPiniaStore = useAuthStore()
 const selectedImage = computed(() => profileStore.selectedImage)
 const imageUploadError = ref<string | null>(null)
 const formError = ref<string | null>(null)
+const emit = defineEmits(['loginSuccess'])
 
 function handleFileChange(event: Event) {
   const target = event.target as HTMLInputElement
@@ -78,9 +79,12 @@ async function handleSubmit() {
         },
       },
     )
-    const { user } = response.data.data
 
-    authPiniaStore.setUser(user)
+    if (response.data.code === 200) {
+      const { user } = response.data.data
+      authPiniaStore.setUser(user)
+      emit('loginSuccess')
+    }
   } catch (error) {
     console.error('Error submitting profile:', error)
     imageUploadError.value =

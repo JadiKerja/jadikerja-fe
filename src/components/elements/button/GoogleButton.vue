@@ -27,13 +27,15 @@ async function handleGoogleLogin() {
       `${import.meta.env.VITE_API_URL}/auth/oauth`,
       { firebaseToken },
     )
+    const goToOnboarding = response.data.data.goToOnboarding
 
-    if (response.data.code === 200 && response.data.data.goToOnBoarding) {
+    if (response.data.code === 200 && goToOnboarding) {
       const accessToken = response.data.data.accessToken
       Cookies.set('accessToken', accessToken)
       router.push('/lengkapi-profile')
     } else if (response.data.code === 200) {
-      const accessToken = response.data.data.accessToken
+      const { accessToken, user } = response.data.data
+      authStore.setUser = user
       Cookies.set('accessToken', accessToken)
       authStore.setUser(response.data.data.user)
       emit('loginSuccess')
