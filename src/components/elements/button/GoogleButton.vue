@@ -1,30 +1,59 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { authFirebase } from '@/components/utils/firebase'
+import GoogleIcon from '@/assets/images/GoogleIcon.vue'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useAuthStore } from '@/stores/userStores'
+
+const isLoading = ref(false)
+const errorMessage = ref('')
+const authStore = useAuthStore()
+const router = useRouter()
+const emit = defineEmits(['loginSuccess'])
+
+async function handleGoogleLogin() {
+  try {
+    isLoading.value = true
+    errorMessage.value = ''
+
+    const provider = new GoogleAuthProvider()
+    const { user: googleUser } = await signInWithPopup(authFirebase, provider)
+    const firebaseToken = await googleUser.getIdToken()
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/auth/oauth`,
+      { firebaseToken },
+    )
+    const goToOnboarding = response.data.data.goToOnboarding
+
+    if (response.data.code === 200 && goToOnboarding) {
+      const accessToken = response.data.data.accessToken
+      Cookies.set('accessToken', accessToken)
+      router.push('/lengkapi-profile')
+    } else if (response.data.code === 200) {
+      const { accessToken, user } = response.data.data
+      authStore.setUser(user)
+      Cookies.set('accessToken', accessToken)
+      authStore.setUser(response.data.data.user)
+      emit('loginSuccess')
+    }
+  } catch (error) {
+    console.error('Google OAuth login failed:', error)
+    errorMessage.value = 'Login failed. Please try again.'
+  } finally {
+    isLoading.value = false
+  }
+}
+</script>
+
 <template>
-  <button>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="55"
-      height="55"
-      viewBox="0 0 55 55"
-      fill="none"
-    >
-      <circle cx="27.5" cy="27.5" r="27.5" fill="#D9D9D9" fill-opacity="0.4" />
-      <path
-        d="M27.3997 19.7947C29.7282 19.7947 31.2988 20.8004 32.1944 21.6409L35.6939 18.224C33.5446 16.2262 30.7477 15 27.3997 15C22.5499 15 18.3615 17.7831 16.3224 21.8338L20.3317 24.9476C21.3375 21.9578 24.1206 19.7947 27.3997 19.7947Z"
-        fill="#EA4335"
-      />
-      <path
-        d="M39.3039 27.6756C39.3039 26.656 39.2212 25.912 39.0421 25.1404H27.3999V29.7422H34.2337C34.0959 30.8858 33.3519 32.608 31.6986 33.7653L35.6115 36.7964C37.9537 34.6333 39.3039 31.4507 39.3039 27.6756Z"
-        fill="#4285F4"
-      />
-      <path
-        d="M20.3458 29.8524C20.084 29.0809 19.9324 28.2542 19.9324 27.4C19.9324 26.5458 20.084 25.7191 20.332 24.9475L16.3227 21.8338C15.4822 23.5147 15 25.4022 15 27.4C15 29.3978 15.4822 31.2853 16.3227 32.9662L20.3458 29.8524Z"
-        fill="#FBBC05"
-      />
-      <path
-        d="M27.3996 39.8C30.7476 39.8 33.5583 38.6978 35.6112 36.7964L31.6983 33.7653C30.6512 34.4956 29.2458 35.0053 27.3996 35.0053C24.1205 35.0053 21.3374 32.8422 20.3454 29.8524L16.3361 32.9662C18.3752 37.0169 22.5498 39.8 27.3996 39.8Z"
-        fill="#34A853"
-      />
-    </svg>
+  <button @click="handleGoogleLogin" :disabled="isLoading">
+    <GoogleIcon />
   </button>
+  <p v-if="errorMessage" class="text-red-500 text-sm mt-2">
+    {{ errorMessage }}
+  </p>
 </template>

@@ -2,15 +2,22 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useProfileStore = defineStore('profile', () => {
-  const selectedImage = ref<string | null>(null)
+  const selectedImage = ref<File | null>(null)
+  const selectedImageUrl = ref<string | null>(null)
 
   function setSelectedImage(file: File) {
-    selectedImage.value = URL.createObjectURL(file)
+    selectedImage.value = file
+    selectedImageUrl.value = URL.createObjectURL(file)
   }
 
   function clearSelectedImage() {
     selectedImage.value = null
   }
 
-  return { selectedImage, setSelectedImage, clearSelectedImage }
+  return {
+    selectedImage,
+    selectedImageUrl,
+    setSelectedImage,
+    clearSelectedImage,
+  }
 })

@@ -24,7 +24,7 @@ function handleFileChange(event: Event) {
       class="absolute w-full h-full rounded-full"
       :style="{
         backgroundImage: profileStore.selectedImage
-          ? `url(${profileStore.selectedImage})`
+          ? `url(${profileStore.selectedImageUrl})`
           : '',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
