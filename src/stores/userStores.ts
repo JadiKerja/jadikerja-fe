@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async fetchUserData() {
-      const router = useRouter()  // Initialize router here
+      const router = useRouter() // Initialize router here
       if (this.accessToken) {
         this.isLoading = true
 
