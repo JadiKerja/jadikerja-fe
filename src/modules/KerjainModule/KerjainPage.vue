@@ -155,9 +155,9 @@ function handleKeyDown(e) {
     class="absolute top-10 left-1/2 translate-x-[-50%] flex w-[90%] rounded-[10px] overflow-hidden"
   >
     <button class="bg-white rounded-full p-3 mr-2" @click="goBack">
-    <RedBackArrow />
+      <RedBackArrow />
     </button>
-    
+
     <input
       type="text"
       v-model="search"

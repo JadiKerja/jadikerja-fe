@@ -158,7 +158,6 @@ async function handleSubmit() {
   </div>
 </template>
 
-
 <style scoped>
 .loader {
   border: 4px solid #f3f3f3;
