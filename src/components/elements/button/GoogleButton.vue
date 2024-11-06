@@ -35,7 +35,7 @@ async function handleGoogleLogin() {
       router.push('/lengkapi-profile')
     } else if (response.data.code === 200) {
       const { accessToken, user } = response.data.data
-      authStore.setUser = user
+      authStore.setUser(user)
       Cookies.set('accessToken', accessToken)
       authStore.setUser(response.data.data.user)
       emit('loginSuccess')
