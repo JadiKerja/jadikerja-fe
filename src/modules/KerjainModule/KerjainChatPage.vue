@@ -48,6 +48,15 @@ onMounted(async () => {
 
   socket.value.on('connect', () => {
     console.log('Connected to socket server')
+
+    // Ping server every 10 seconds to keep the connection alive
+    setInterval(() => {
+      socket.value.emit('ping', { message: 'ping' })
+    }, 10000) // Ping every 10 seconds
+  })
+
+  socket.value.on('pong', (data) => {
+    console.log('Pong received:', data) // Handle pong response
   })
 
   socket.value.on('chat', (response) => {
