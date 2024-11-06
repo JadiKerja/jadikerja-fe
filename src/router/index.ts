@@ -7,6 +7,7 @@ import BerandaView from '@/views/BerandaView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import KerjainView from '../views/KerjainView.vue'
 import EditingProfile from '@/views/profile/EditingProfile.vue'
+import SyaratKetentuanView from '@/views/profile/SyaratKetentuanView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/profile/edit',
       name: 'profile edit',
       component: EditingProfile,
+    },
+    {
+      path: '/profile/snk',
+      name: 'syarat dan ketentuan',
+      component: SyaratKetentuanView,
     },
     {
       path: '/kerjain',

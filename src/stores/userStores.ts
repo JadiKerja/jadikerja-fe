@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { ref, computed, watchEffect } from 'vue'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { useRouter } from 'vue-router'
 
 enum Role {
   Client = 'CLIENT',
@@ -27,46 +27,45 @@ interface User {
   client: Client | null
 }
 
-export const useAuthStore = defineStore('auth', () => {
-  const user = ref<User | null>(null)
-  const accessToken = ref(Cookies.get('accessToken') || '')
-  const isLoading = ref(false)
-  const isLoggedIn = computed(() => !!user.value)
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: null as User | null,
+    accessToken: Cookies.get('accessToken'),
+    isLoading: false,
+    isLoggedIn: false,
+  }),
+  actions: {
+    async fetchUserData() {
+      const router = useRouter() // Initialize router here
+      if (this.accessToken) {
+        this.isLoading = true
 
-  async function fetchUserData() {
-    if (accessToken.value) {
-      isLoading.value = true
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VUE_APP_API_URL}/auth/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken.value}`,
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_URL}/auth/user`,
+            {
+              headers: {
+                Authorization: `Bearer ${this.accessToken}`,
+              },
             },
-          },
-        )
-
-        if (response.data.data) {
-          user.value = response.data.data.user as User
+          )
+          if (response.data.data) {
+            this.user = response.data.data as User
+          }
+        } catch (error) {
+          console.error('Failed to fetch user data', error)
+          this.user = null
+          router.push('/login')
+        } finally {
+          this.isLoading = false
         }
-      } catch (error) {
-        console.error('Failed to fetch user data', error)
-        user.value = null
-      } finally {
-        isLoading.value = false
+      } else {
+        router.push('/login')
       }
-    }
-  }
+    },
 
-  function setUser(userData: User | null) {
-    user.value = userData
-  }
-
-  watchEffect(() => {
-    if (accessToken.value) {
-      fetchUserData()
-    }
-  })
-
-  return { user, isLoading, isLoggedIn, fetchUserData, setUser }
+    setUser(user: User | null) {
+      this.user = user
+    },
+  },
 })

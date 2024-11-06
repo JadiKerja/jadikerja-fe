@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import IconProfile from '@/assets/images/IconProfile.vue'
-import { computed } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/userStores'
 import { RouterLink } from 'vue-router'
 import EditProfileIcon from '@/assets/images/EditProfileIcon.vue'
@@ -12,10 +12,16 @@ import LogoutIcon from '@/assets/images/LogoutIcon.vue'
 import Cookies from 'js-cookie'
 
 const profileStore = useAuthStore()
-const profileImageUrl = computed(
-  () => profileStore.user?.client?.profileUrl || '',
-)
-const fullName = computed(() => profileStore.user?.client?.fullName || 'Guest')
+// const profileImageUrl = ref(profileStore.user?.client?.profileUrl || '')
+// const fullName = ref(profileStore.user?.client?.fullName || 'Guest')
+
+onMounted(() => {
+  if (!profileStore.user) {
+    profileStore.fetchUserData()
+  }
+})
+
+console.log(profileStore.user)
 
 function handleLogout() {
   profileStore.setUser(null)
@@ -51,16 +57,21 @@ function handleLogout() {
         <div
           class="absolute w-full h-full rounded-full"
           :style="{
-            backgroundImage: profileImageUrl ? `url(${profileImageUrl})` : '',
+            backgroundImage: profileStore.user?.client?.profileUrl
+              ? `url(${profileStore.user?.client?.profileUrl})`
+              : '',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }"
         >
-          <IconProfile v-if="!profileImageUrl" class="w-full h-full" />
+          <IconProfile
+            v-if="!profileStore.user?.client?.profileUrl"
+            class="w-full h-full"
+          />
         </div>
       </div>
       <p class="text-[1.25rem] font-semibold tracking-[.01563rem] text-white">
-        {{ fullName }}
+        {{ profileStore.user?.client?.fullName ?? 'Guest' }}
       </p>
     </div>
     <div
