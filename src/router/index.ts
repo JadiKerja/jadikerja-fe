@@ -5,6 +5,7 @@ import LoginView from '@/views/LoginView.vue'
 import EditProfile from '@/views/EditProfile.vue'
 import BerandaView from '@/views/BerandaView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import KerjainView from '../views/KerjainView.vue'
 import EditingProfile from '@/views/profile/EditingProfile.vue'
 
 const router = createRouter({
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/profile/edit',
       name: 'profile edit',
       component: EditingProfile,
+    },
+    {
+      path: '/kerjain',
+      name: 'kerjain',
+      component: KerjainView,
     },
   ],
 })
