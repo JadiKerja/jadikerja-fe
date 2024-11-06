@@ -39,7 +39,8 @@ async function handleLogin() {
     emit('loginSuccess')
   } catch (error) {
     console.error('Error logging in:', error)
-    errorMessage.value = 'Login belum berhasil. Cek kembali email dan password kamu'
+    errorMessage.value =
+      'Login belum berhasil. Cek kembali email dan password kamu'
   } finally {
     isLoading.value = false
   }

@@ -113,7 +113,7 @@ onMounted(async () => {
 <style scoped>
 .loader {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #D62727;
+  border-top: 4px solid #d62727;
   border-radius: 50%;
   width: 24px;
   height: 24px;

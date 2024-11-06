@@ -33,7 +33,9 @@ onMounted(async () => {
   }
 
   authStore.fullName = authPiniaStore.user.client.fullName
-  authStore.birthDate = formatDateToYYYYMMDD(authPiniaStore.user.client.birthDate)
+  authStore.birthDate = formatDateToYYYYMMDD(
+    authPiniaStore.user.client.birthDate,
+  )
   authStore.location = authPiniaStore.user.client.domicile
   authStore.phoneNumber = authPiniaStore.user.client.phone
   profileStore.selectedImageUrl = authPiniaStore.user.client.profileUrl
@@ -135,9 +137,14 @@ function goBack() {
   <div v-if="isLoading" class="flex items-center justify-center min-h-screen">
     <div class="loader"></div>
   </div>
-  <div v-else class="flex flex-col relative w-full min-h-screen items-center pb-[2.5rem] pt-12 px-7 gap-4">
+  <div
+    v-else
+    class="flex flex-col relative w-full min-h-screen items-center pb-[2.5rem] pt-12 px-7 gap-4"
+  >
     <BackButton class="self-start absolute" @click="goBack" />
-    <p class="text-black text-[1.25rem] font-bold tracking-[.0125rem]">Edit Akun</p>
+    <p class="text-black text-[1.25rem] font-bold tracking-[.0125rem]">
+      Edit Akun
+    </p>
     <form
       method="POST"
       enctype="multipart/form-data"
@@ -145,12 +152,28 @@ function goBack() {
       @submit.prevent="handleSubmit"
     >
       <InputImage :selectedImage="selectedImage" @change="handleFileChange" />
-      <InputAuth label="Nama Lengkap" placeholder="Nama Lengkap" field="fullName" />
-      <InputAuth label="Tanggal Lahir" placeholder="DD/MM/YYYY" field="birthDate" type="date" :value="authStore.birthDate" />
+      <InputAuth
+        label="Nama Lengkap"
+        placeholder="Nama Lengkap"
+        field="fullName"
+      />
+      <InputAuth
+        label="Tanggal Lahir"
+        placeholder="DD/MM/YYYY"
+        field="birthDate"
+        type="date"
+        :value="authStore.birthDate"
+      />
       <InputAuth label="Domisili" placeholder="Domisili" field="location" />
-      <InputAuth label="No. Telepon" placeholder="No. Telepon" field="phoneNumber" />
+      <InputAuth
+        label="No. Telepon"
+        placeholder="No. Telepon"
+        field="phoneNumber"
+      />
 
-      <p v-if="imageUploadError" class="text-red-500 text-sm">{{ imageUploadError }}</p>
+      <p v-if="imageUploadError" class="text-red-500 text-sm">
+        {{ imageUploadError }}
+      </p>
       <p v-if="formError" class="text-red-500 text-sm">{{ formError }}</p>
 
       <button
@@ -168,7 +191,7 @@ function goBack() {
 <style scoped>
 .loader {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #D62727;
+  border-top: 4px solid #d62727;
   border-radius: 50%;
   width: 24px;
   height: 24px;

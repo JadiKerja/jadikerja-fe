@@ -47,7 +47,7 @@ function goBack() {
 
 <template>
   <div class="flex flex-col p-7 gap-8">
-    <div class="flex flex-row justify-center  relative">
+    <div class="flex flex-row justify-center relative">
       <BackButton class="self-start absolute left-0" @click="goBack" />
       <p class="text-[#0A0E32] text-[1.5rem] font-bold tracking-[.01875rem]">
         Daftar Pekerjaan
@@ -60,7 +60,10 @@ function goBack() {
     </div>
 
     <template v-else>
-      <p v-if="pekerjaanList.length === 0" class="text-center text-[#0A0E32] text-sm">
+      <p
+        v-if="pekerjaanList.length === 0"
+        class="text-center text-[#0A0E32] text-sm"
+      >
         Anda belum memposting pekerjaan
       </p>
       <div
@@ -84,11 +87,10 @@ function goBack() {
   </div>
 </template>
 
-
 <style scoped>
 .loader {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #D62727;
+  border-top: 4px solid #d62727;
   border-radius: 50%;
   width: 24px;
   height: 24px;

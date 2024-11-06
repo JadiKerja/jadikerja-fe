@@ -50,17 +50,17 @@ async function handleGoogleLogin() {
 </script>
 
 <template>
-  <button 
-    @click="handleGoogleLogin" 
+  <button
+    @click="handleGoogleLogin"
     :disabled="isLoading"
-    class="flex items-center justify-center "
+    class="flex items-center justify-center"
   >
     <template v-if="!isLoading">
       <GoogleIcon />
     </template>
     <template v-else>
       <div class="flex items-center justify-center">
-        <div class="loader"></div> 
+        <div class="loader"></div>
         <span class="text-sm font-semibold ml-2">Loading...</span>
       </div>
     </template>
@@ -73,7 +73,7 @@ async function handleGoogleLogin() {
 <style scoped>
 .loader {
   border: 4px solid transparent;
-  border-top-color: #D62727;
+  border-top-color: #d62727;
   border-radius: 50%;
   width: 16px;
   height: 16px;

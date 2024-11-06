@@ -40,7 +40,7 @@ async function handleSubmit() {
     !profileStore.selectedImage
   ) {
     formError.value = 'Please fill in all fields.'
-    isSubmitting.value = false 
+    isSubmitting.value = false
     return
   }
 
@@ -56,7 +56,7 @@ async function handleSubmit() {
 
     if (!imageUrl) {
       imageUploadError.value = 'Failed to upload image. Please try again.'
-      isSubmitting.value = false 
+      isSubmitting.value = false
       return
     }
 
@@ -71,7 +71,7 @@ async function handleSubmit() {
     const token = Cookies.get('accessToken')
     if (!token) {
       formError.value = 'Authentication error. Please log in again.'
-      isSubmitting.value = false 
+      isSubmitting.value = false
       return
     }
 
@@ -95,7 +95,7 @@ async function handleSubmit() {
     imageUploadError.value =
       'An error occurred during submission. Please try again.'
   } finally {
-    isSubmitting.value = false 
+    isSubmitting.value = false
   }
 }
 </script>
