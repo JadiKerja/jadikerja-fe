@@ -16,11 +16,11 @@ const auth = useInputStore()
 const router = useRouter()
 const authPiniaStore = useAuthStore()
 const isLoading = ref(false)
-const errorMessage = ref('') // Error message state
+const errorMessage = ref('')
 
 async function handleLogin() {
   isLoading.value = true
-  errorMessage.value = '' // Reset error message
+  errorMessage.value = ''
 
   try {
     const formData = {
@@ -77,6 +77,7 @@ function handleGoogleLoginSuccess() {
         placeholder="Masukkan Email"
         field="email"
         :LeftIcon="MessageIcon"
+        @keyup.enter="handleLogin"
       />
       <InputAuth
         label="Password"
@@ -85,6 +86,7 @@ function handleGoogleLoginSuccess() {
         field="password"
         :LeftIcon="LockIcon"
         :rightIcon="true"
+        @keyup.enter="handleLogin"
       />
       <p v-if="errorMessage" class="text-red-500 text-sm mt-2 flex self-center">
         {{ errorMessage }}

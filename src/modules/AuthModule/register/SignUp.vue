@@ -57,6 +57,7 @@ onMounted(() => {
         placeholder="Masukkan Email"
         field="email"
         :LeftIcon="MessageIcon"
+        @keyup.enter="validateAndProceed"
       />
       <InputAuth
         label="Password"
@@ -65,6 +66,7 @@ onMounted(() => {
         type="password"
         :LeftIcon="LockIcon"
         :rightIcon="true"
+        @keyup.enter="validateAndProceed"
       />
       <InputAuth
         label="Konfirmasi Password"
@@ -73,6 +75,7 @@ onMounted(() => {
         type="password"
         :LeftIcon="LockIcon"
         :rightIcon="true"
+        @keyup.enter="validateAndProceed"
       />
       <p v-if="errorMessage" class="text-red-500 text-sm mt-1">
         {{ errorMessage }}
@@ -87,9 +90,9 @@ onMounted(() => {
     <div class="flex flex-col gap-3 w-full justify-center items-center">
       <p class="text-sm font-semibold text-black">
         Sudah Punya Akun?
-        <RouterLink to="/login" @click="clearFields" class="text-[#D62727]"
-          >Masuk</RouterLink
-        >
+        <RouterLink to="/login" @click="clearFields" class="text-[#D62727]">
+          Masuk
+        </RouterLink>
       </p>
       <div class="flex flex-row items-center gap-3 w-full">
         <div class="w-full h-[0.0625rem] bg-[#B9BCC4]"></div>
