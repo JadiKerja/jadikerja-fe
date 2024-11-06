@@ -5,6 +5,9 @@ import Hero from '@/components/elements/Hero.vue'
 import BerandaCard from '@/components/elements/card/BerandaCard.vue'
 import UpgradeDiriCard from '@/components/elements/card/UpgradeDiriCard.vue'
 import { onMounted } from 'vue'
+import upgradeImage1 from '@/assets/images/upgrade-diri-1.png'
+import upgradeImage2 from '@/assets/images/upgrade-diri-2.png'
+import upgradeImage3 from '@/assets/images/upgrade-diri-3.png'
 
 const authStore = useAuthStore()
 
@@ -71,18 +74,24 @@ console.log(authStore.user)
         :title="'Belajar Pemrograman Web'"
         :desc="'Menjadi Pengembang Web Full-Stack hanya dengan SATU kursus. HTML, CSS, JavaScript, Node, React, PostgreSQL, Web3, dan DApps.'"
         :name="'Dr. Siti Zubaedah, Developer and Lecturer'"
+        :imgSrc="upgradeImage1"
+        :url="'https://www.udemy.com/course/the-complete-web-development-bootcamp'"
       />
       <UpgradeDiriCard
         :id="'2'"
         :title="'Belajar Digital Marketing'"
         :desc="'Strategi Pemasaran Digital, Pemasaran Media Sosial, WordPress, SEO, ChatGPT, Email, Instagram, Facebook, YouTube, iklan'"
-        :name="'Dr. Joni marjoni, Marketeer and Lecturer'"
+        :name="'Dr. Joni Marjoni, Marketeer and Lecturer'"
+        :imgSrc="upgradeImage2"
+        :url="'https://www.udemy.com/course/digital-marketing-strategy-course-wordpress-seo-instagram-facebook'"
       />
       <UpgradeDiriCard
         :id="'3'"
         :title="'Belajar Masak Steak Ayam'"
         :desc="'Belajar memasak bersama saya - Saya senang mengajar memasak kepada murid-murid saya'"
         :name="'Rini Yuliana Marsudini, Chef at Abuba Steak'"
+        :imgSrc="upgradeImage3"
+        :url="'https://www.udemy.com/course/master-chef-cooking-course-12-episodes'"
       />
     </div>
   </div>
