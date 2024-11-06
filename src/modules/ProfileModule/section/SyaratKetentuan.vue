@@ -11,7 +11,7 @@ function goBack() {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col items-center w-full">
+  <div class="h-screen flex flex-col items-center w-full">
     <div
       class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full pb-[4.5rem] pt-[3rem] px-7 gap-6 overflow-hidden"
     >
@@ -37,7 +37,7 @@ function goBack() {
       </div>
     </div>
     <div
-      class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col p-7 gap-5 z-20 bg-[#F8FAFF]"
+      class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col p-7 gap-5 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
     >
       <div class="flex flex-col gap-2">
         <p
@@ -96,3 +96,14 @@ function goBack() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.custom-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
