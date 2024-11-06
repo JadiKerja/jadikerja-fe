@@ -2,11 +2,11 @@
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/userStores'
-import SearchInput from '@/components/elements/SearchInput.vue';
-import TwoUserIcon from '@/assets/images/TwoUserIcon.vue';
-import { RouterLink } from 'vue-router';
-import WhiteRobot from '@/components/elements/WhiteRobot.vue';
-import UpgradeDiriCard from '@/components/elements/card/UpgradeDiriCard.vue';
+import SearchInput from '@/components/elements/SearchInput.vue'
+import TwoUserIcon from '@/assets/images/TwoUserIcon.vue'
+import { RouterLink } from 'vue-router'
+import WhiteRobot from '@/components/elements/WhiteRobot.vue'
+import UpgradeDiriCard from '@/components/elements/card/UpgradeDiriCard.vue'
 
 const profileStore = useAuthStore()
 
@@ -15,7 +15,6 @@ onMounted(() => {
     profileStore.fetchUserData()
   }
 })
-
 </script>
 
 <template>
@@ -36,13 +35,12 @@ onMounted(() => {
         class="absolute -bottom-[2rem] -left-[3rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]"
       />
 
-      <p class="text-[1.875rem] leading-[140%] font-bold text-white tracking-[0.02188rem] z-10">
+      <p
+        class="text-[1.875rem] leading-[140%] font-bold text-white tracking-[0.02188rem] z-10"
+      >
         Upgrade Diri
       </p>
-      <SearchInput 
-      :isBeranda="false"
-      class="w-full z-10"
-      />
+      <SearchInput :isBeranda="false" class="w-full z-10" />
     </div>
     <div
       class="flex flex-col px-7 pt-4 pb-[7rem] text-black font-semibold w-full gap-5"
@@ -50,23 +48,22 @@ onMounted(() => {
       <div class="flex flex-col gap-3">
         <div class="flex flex-row gap-3">
           <TwoUserIcon />
-          <p class="text-[0.753rem] font-medium text-[#AAA5A5]">
-            Bot Pesan
-          </p>
+          <p class="text-[0.753rem] font-medium text-[#AAA5A5]">Bot Pesan</p>
         </div>
-        <RouterLink 
-        to="/jedai"
-        class="w-full flex flex-row py-3 px-4 bg-[#F8C2C2] rounded-[1.875rem] gap-4">
-          <WhiteRobot class="w-[2.05531rem]"/>
+        <RouterLink
+          to="/jedai"
+          class="w-full flex flex-row py-3 px-4 bg-[#F8C2C2] rounded-[1.875rem] gap-4"
+        >
+          <WhiteRobot class="w-[2.05531rem]" />
           <div class="flex flex-col">
             <p class="text-black text-[0.875rem] font-semibold">Jed AI</p>
-            <p class="text-black text-[0.6875rem] font-normal">Temukan kursus cocok untukmu disini</p>
+            <p class="text-black text-[0.6875rem] font-normal">
+              Temukan kursus cocok untukmu disini
+            </p>
           </div>
         </RouterLink>
       </div>
-      <p class="text-black font-bold">
-        Tingkatkan kemampuan diri 
-      </p>
+      <p class="text-black font-bold">Tingkatkan kemampuan diri</p>
       <div class="flex flex-col gap-2">
         <UpgradeDiriCard
           :id="'1'"

@@ -33,9 +33,7 @@ console.log(authStore.user)
       </p>
     </div>
     <div class="flex flex-col gap-4">
-      <SearchInput 
-      :isBeranda="true"
-      />
+      <SearchInput :isBeranda="true" />
       <Hero />
       <p class="text-black font-bold">Rekomendasi Pekerjaan untukmu</p>
 
