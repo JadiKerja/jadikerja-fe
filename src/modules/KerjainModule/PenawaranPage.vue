@@ -6,45 +6,84 @@ import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { useAuthStore } from '@/stores/userStores'
 
-const route = useRoute()
-const router = useRouter()
 const isLoading = ref(true)
 const chatList = ref([])
+
+const route = useRoute()
+const id = route.params.id
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+onMounted(async () => {
+  if (!authStore.user) {
+    isLoading.value = true
+    await authStore.fetchUserData()
+  }
+
+  chatList.value = await fetchData()
+})
+
+async function fetchData() {
+  try {
+    const token = Cookies.get('accessToken')
+
+    isLoading.value = true
+
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/kerjain/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+
+    if (response.data.code === 200) {
+      return response.data.data.kerjain.kerjainApply
+    }
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  }
+}
 
 function goBack() {
   router.back()
 }
 
-async function fetchKerjainData() {
-  const token = Cookies.get('accessToken')
-  const id = route.params.id
-  if (token) {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/kerjain/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      chatList.value = response.data.data.kerjain.kerjainApply
-      console.log(chatList)
-    } catch (error) {
-      console.error('Error fetching Kerjain data:', error)
-    } finally {
-      isLoading.value = false
-    }
-  } else {
-    console.error('No access token found.')
-    isLoading.value = false
-  }
-}
+// async function fetchKerjainData() {
+//   const token = Cookies.get('accessToken')
+//   const id = route.params.id
+//   if (token) {
+//     try {
+//       const response = await axios.get(
+//         `${import.meta.env.VITE_API_URL}/kerjain/${id}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         },
+//       )
+//       chatList.value = response.data.data.kerjain.kerjainApply
+//       console.log(chatList)
+//     } catch (error) {
+//       console.error('Error fetching Kerjain data:', error)
+//     } finally {
+//       isLoading.value = false
+//     }
+//   } else {
+//     console.error('No access token found.')
+//     isLoading.value = false
+//   }
+// }
 
-onMounted(() => {
-  fetchKerjainData()
-})
+// onMounted(() => {
+//   fetchKerjainData()
+// })
 </script>
 
 <template>
@@ -90,9 +129,9 @@ onMounted(() => {
       >
         <AllChatCard
           :id="chat.id"
-          :name="chat.fullName"
-          :address="chat.domicile"
-          :profileUrl="chat.profileUrl"
+          :name="chat.client.fullName"
+          :address="chat.client.domicile"
+          :profileUrl="chat.client.profileUrl"
         />
       </div>
       <div v-else>

@@ -14,7 +14,7 @@ const { chat, profileUrl } = defineProps<{
     <img
       :src="profileUrl"
       alt="peer-profile-image"
-      class="w-[40px] h-[40px] rounded-full"
+      class="w-[40px] min-w-[40px] h-[40px] rounded-full overflow-hidden"
     />
     <div class="flex flex-col">
       <vue-markdown

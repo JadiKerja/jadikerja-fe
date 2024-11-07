@@ -12,11 +12,11 @@ const props = defineProps<{
     :to="`/kerjain/chat/${props.id}`"
     class="flex flex-row gap-4 w-full"
   >
-    <div
-      class="p-[0.83rem] bg-[#D62727] rounded-full h-[3.125rem] w-[3.125rem]"
-    >
-      <img :src="props.profileUrl" :alt="props.name" />
-    </div>
+    <img
+      :src="props.profileUrl"
+      :alt="props.name"
+      class="bg-[#D62727] h-[3.125rem] min-w-[3.125rem] w-[3.125rem] rounded-full overflow-hidden"
+    />
     <div class="flex flex-col gap-1 w-full">
       <p class="text-black font-semibold">
         {{ props.name }}
