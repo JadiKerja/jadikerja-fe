@@ -39,16 +39,17 @@ const courseList = ref([
     name: 'Rini Yuliana Marsudini, Chef at Abuba Steak',
     imgSrc: upgradeImage3,
     url: 'https://www.udemy.com/course/master-chef-cooking-course-12-episodes',
-  }
+  },
 ])
 
 const filteredCourses = computed(() => {
   if (!searchQuery.value) {
     return courseList.value
   }
-  return courseList.value.filter(course =>
-    course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    course.desc.toLowerCase().includes(searchQuery.value.toLowerCase())
+  return courseList.value.filter(
+    (course) =>
+      course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      course.desc.toLowerCase().includes(searchQuery.value.toLowerCase()),
   )
 })
 
@@ -69,26 +70,51 @@ onMounted(async () => {
     <div class="loader"></div>
   </div>
   <div v-else class="min-h-screen flex flex-col items-center w-full">
-    <div class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full py-8 px-7 gap-6 overflow-hidden">
-      <TransparentCircle class="absolute -top-[4rem] -right-[6rem] bg-[#E55A24B2] w-[10.66975rem] h-[10.66975rem]" />
-      <TransparentCircle class="absolute -top-[3rem] -right-[5rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]" />
-      <TransparentCircle class="absolute -bottom-[3rem] -left-[5rem] bg-[#E55A24B2] w-[10.66975rem] h-[10.66975rem]" />
-      <TransparentCircle class="absolute -bottom-[2rem] -left-[3rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]" />
+    <div
+      class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full py-8 px-7 gap-6 overflow-hidden"
+    >
+      <TransparentCircle
+        class="absolute -top-[4rem] -right-[6rem] bg-[#E55A24B2] w-[10.66975rem] h-[10.66975rem]"
+      />
+      <TransparentCircle
+        class="absolute -top-[3rem] -right-[5rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]"
+      />
+      <TransparentCircle
+        class="absolute -bottom-[3rem] -left-[5rem] bg-[#E55A24B2] w-[10.66975rem] h-[10.66975rem]"
+      />
+      <TransparentCircle
+        class="absolute -bottom-[2rem] -left-[3rem] bg-[#E55A2466] w-[10.66975rem] h-[10.66975rem]"
+      />
 
-      <p class="text-[1.875rem] leading-[140%] font-bold text-white tracking-[0.02188rem] z-10">Upgrade Diri</p>
-      <SearchInput :isBeranda="false" class="w-full z-10" @search="handleSearch" />
+      <p
+        class="text-[1.875rem] leading-[140%] font-bold text-white tracking-[0.02188rem] z-10"
+      >
+        Upgrade Diri
+      </p>
+      <SearchInput
+        :isBeranda="false"
+        class="w-full z-10"
+        @search="handleSearch"
+      />
     </div>
-    <div class="flex flex-col px-7 pt-4 pb-[7rem] text-black font-semibold w-full gap-5">
+    <div
+      class="flex flex-col px-7 pt-4 pb-[7rem] text-black font-semibold w-full gap-5"
+    >
       <div class="flex flex-col gap-3">
         <div class="flex flex-row gap-3">
           <TwoUserIcon />
           <p class="text-[0.753rem] font-medium text-[#AAA5A5]">Bot Pesan</p>
         </div>
-        <RouterLink to="/jedai" class="w-full flex flex-row py-3 px-4 bg-[#F8C2C2] rounded-[1.875rem] gap-4">
+        <RouterLink
+          to="/jedai"
+          class="w-full flex flex-row py-3 px-4 bg-[#F8C2C2] rounded-[1.875rem] gap-4"
+        >
           <WhiteRobot class="w-[2.05531rem]" />
           <div class="flex flex-col">
             <p class="text-black text-[0.875rem] font-semibold">Jed AI</p>
-            <p class="text-black text-[0.6875rem] font-normal">Temukan kursus cocok untukmu disini</p>
+            <p class="text-black text-[0.6875rem] font-normal">
+              Temukan kursus cocok untukmu disini
+            </p>
           </div>
         </RouterLink>
       </div>

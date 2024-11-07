@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PenawaranPage from '@/modules/KerjainModule/PenawaranPage.vue';
+import PenawaranPage from '@/modules/KerjainModule/PenawaranPage.vue'
 </script>
 
 <template>

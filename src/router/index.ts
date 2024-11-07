@@ -111,7 +111,7 @@ const router = createRouter({
       path: '/kerjain/:id/penawaran',
       name: 'semua penawaran',
       component: SemuaPenawaranView,
-    }
+    },
   ],
 })
 

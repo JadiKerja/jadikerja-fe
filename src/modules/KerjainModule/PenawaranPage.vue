@@ -15,38 +15,38 @@ const chatList = [
     id: '1',
     name: 'John Doe',
     address: 'Jakarta, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150'
+    profileUrl: 'https://via.placeholder.com/150',
   },
   {
     id: '2',
     name: 'Jane Smith',
     address: 'Bandung, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150'
+    profileUrl: 'https://via.placeholder.com/150',
   },
   {
     id: '3',
     name: 'Robert Johnson',
     address: 'Surabaya, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150'
+    profileUrl: 'https://via.placeholder.com/150',
   },
   {
     id: '4',
     name: 'Emily Davis',
     address: 'Medan, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150'
+    profileUrl: 'https://via.placeholder.com/150',
   },
   {
     id: '5',
     name: 'Michael Brown',
     address: 'Yogyakarta, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150'
+    profileUrl: 'https://via.placeholder.com/150',
   },
   {
     id: '6',
     name: 'Sarah Wilson',
     address: 'Bali, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150'
-  }
+    profileUrl: 'https://via.placeholder.com/150',
+  },
 ]
 </script>
 
@@ -79,9 +79,7 @@ const chatList = [
     <div
       class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col px-7 pb-7 pt-5 gap-4 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
     >
-      <p class="text-black text-[1.25rem] font-semibold">
-        Penawaran kamu
-      </p>
+      <p class="text-black text-[1.25rem] font-semibold">Penawaran kamu</p>
       <div v-for="(chat, index) in chatList" :key="index">
         <AllChatCard
           :id="chat.id"

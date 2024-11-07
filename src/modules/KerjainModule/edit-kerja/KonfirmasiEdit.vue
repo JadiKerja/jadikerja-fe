@@ -17,7 +17,6 @@ function handleConfirm() {
   kerjainStore.name = ''
   kerjainStore.phoneNumber = ''
 }
-
 </script>
 
 <template>
