@@ -40,7 +40,7 @@ function handleConfirm() {
         <WhiteBackButton @click="emit('back')" />
 
         <p class="text-[1.5rem] font-bold text-white tracking-[0.01563rem]">
-          Tambah Kerjaan
+          Edit Kerjaan
         </p>
         <div></div>
       </div>
@@ -134,7 +134,7 @@ function handleConfirm() {
         @click="handleConfirm"
         class="w-full py-[0.8125rem] text-white bg-[#D62727] text-center font-semibold rounded-[0.9375rem]"
       >
-        Konfirmasi
+        Edit
       </button>
     </div>
   </div>

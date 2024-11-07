@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import { useAuthStore } from '@/stores/userStores'
 import SearchInput from '@/components/elements/SearchInput.vue'
@@ -13,6 +13,49 @@ import upgradeImage3 from '@/assets/images/upgrade-diri-3.png'
 
 const profileStore = useAuthStore()
 const isLoading = ref(true)
+const searchQuery = ref('')
+
+const courseList = ref([
+  {
+    id: '1',
+    title: 'Belajar Pemrograman Web',
+    desc: 'Menjadi Pengembang Web Full-Stack hanya dengan SATU kursus. HTML, CSS, JavaScript, Node, React, PostgreSQL, Web3, dan DApps.',
+    name: 'Dr. Siti Zubaedah, Developer and Lecturer',
+    imgSrc: upgradeImage1,
+    url: 'https://www.udemy.com/course/the-complete-web-development-bootcamp',
+  },
+  {
+    id: '2',
+    title: 'Belajar Digital Marketing',
+    desc: 'Strategi Pemasaran Digital, Pemasaran Media Sosial, WordPress, SEO, ChatGPT, Email, Instagram, Facebook, YouTube, iklan',
+    name: 'Dr. Joni Marjoni, Marketeer and Lecturer',
+    imgSrc: upgradeImage2,
+    url: 'https://www.udemy.com/course/digital-marketing-strategy-course-wordpress-seo-instagram-facebook',
+  },
+  {
+    id: '3',
+    title: 'Belajar Masak Steak Ayam',
+    desc: 'Belajar memasak bersama saya - Saya senang mengajar memasak kepada murid-murid saya',
+    name: 'Rini Yuliana Marsudini, Chef at Abuba Steak',
+    imgSrc: upgradeImage3,
+    url: 'https://www.udemy.com/course/master-chef-cooking-course-12-episodes',
+  },
+])
+
+const filteredCourses = computed(() => {
+  if (!searchQuery.value) {
+    return courseList.value
+  }
+  return courseList.value.filter(
+    (course) =>
+      course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      course.desc.toLowerCase().includes(searchQuery.value.toLowerCase()),
+  )
+})
+
+function handleSearch(query: string) {
+  searchQuery.value = query
+}
 
 onMounted(async () => {
   if (!profileStore.user) {
@@ -48,7 +91,11 @@ onMounted(async () => {
       >
         Upgrade Diri
       </p>
-      <SearchInput :isBeranda="false" class="w-full z-10" />
+      <SearchInput
+        :isBeranda="false"
+        class="w-full z-10"
+        @search="handleSearch"
+      />
     </div>
     <div
       class="flex flex-col px-7 pt-4 pb-[7rem] text-black font-semibold w-full gap-5"
@@ -74,28 +121,14 @@ onMounted(async () => {
       <p class="text-black font-bold">Tingkatkan kemampuan diri</p>
       <div class="flex flex-col gap-2">
         <UpgradeDiriCard
-          :id="'1'"
-          :title="'Belajar Pemrograman Web'"
-          :desc="'Menjadi Pengembang Web Full-Stack hanya dengan SATU kursus. HTML, CSS, JavaScript, Node, React, PostgreSQL, Web3, dan DApps.'"
-          :name="'Dr. Siti Zubaedah, Developer and Lecturer'"
-          :imgSrc="upgradeImage1"
-          :url="'https://www.udemy.com/course/the-complete-web-development-bootcamp'"
-        />
-        <UpgradeDiriCard
-          :id="'2'"
-          :title="'Belajar Digital Marketing'"
-          :desc="'Strategi Pemasaran Digital, Pemasaran Media Sosial, WordPress, SEO, ChatGPT, Email, Instagram, Facebook, YouTube, iklan'"
-          :name="'Dr. Joni Marjoni, Marketeer and Lecturer'"
-          :imgSrc="upgradeImage2"
-          :url="'https://www.udemy.com/course/digital-marketing-strategy-course-wordpress-seo-instagram-facebook'"
-        />
-        <UpgradeDiriCard
-          :id="'3'"
-          :title="'Belajar Masak Steak Ayam'"
-          :desc="'Belajar memasak bersama saya - Saya senang mengajar memasak kepada murid-murid saya'"
-          :name="'Rini Yuliana Marsudini, Chef at Abuba Steak'"
-          :imgSrc="upgradeImage3"
-          :url="'https://www.udemy.com/course/master-chef-cooking-course-12-episodes'"
+          v-for="course in filteredCourses"
+          :key="course.id"
+          :id="course.id"
+          :title="course.title"
+          :desc="course.desc"
+          :name="course.name"
+          :imgSrc="course.imgSrc"
+          :url="course.url"
         />
       </div>
     </div>

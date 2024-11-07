@@ -50,13 +50,13 @@ const props = defineProps({
     </div>
     <div class="flex w-full gap-2">
       <RouterLink
-        :to="`/profile/pekerjaan/edit/${props.id}`"
+        :to="`/kerjain/${props.id}/edit`"
         class="w-[80px] py-2 text-[10px] bg-[#D62727] hover:bg-[#771515] text-white font-semibold text-center rounded-[18px] transition-all"
       >
         Edit
       </RouterLink>
       <RouterLink
-        :to="`/pekerjaan/${props.id}`"
+        :to="`/kerjain/${props.id}/penawaran`"
         class="w-[80px] py-2 text-[10px] bg-[#F4A91E] hover:bg-[#d39626] text-white font-semibold text-center rounded-[18px] transition-all"
       >
         Penawaran

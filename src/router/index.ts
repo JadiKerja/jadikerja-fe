@@ -9,13 +9,14 @@ import KerjainView from '../views/KerjainView.vue'
 import EditingProfile from '@/views/profile/EditingProfile.vue'
 import SyaratKetentuanView from '@/views/profile/SyaratKetentuanView.vue'
 import PekerjaanSayaView from '@/views/profile/PekerjaanSayaView.vue'
-import EditPekerjaanView from '@/views/kerjain/EditPekerjaanView.vue'
 import LamaranView from '@/views/profile/LamaranView.vue'
 import KerjainChatView from '../views/kerjain/KerjainChatView.vue'
 import AddKerjainView from '@/views/kerjain/AddKerjainView.vue'
 import CariKerjaView from '@/views/CariKerjaView.vue'
 import UpgradeDiriView from '@/views/UpgradeDiriView.vue'
 import JedAIView from '@/views/jedai/JedAIView.vue'
+import EditKerjainView from '@/views/kerjain/EditKerjainView.vue'
+import SemuaPenawaranView from '@/views/kerjain/SemuaPenawaranView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,12 +72,6 @@ const router = createRouter({
       component: PekerjaanSayaView,
     },
     {
-      path: '/profile/pekerjaan/:id',
-      name: 'detail pekerjaan',
-      component: EditPekerjaanView,
-      props: true,
-    },
-    {
       path: '/profile/lamaran',
       name: 'lamaran saya',
       component: LamaranView,
@@ -106,6 +101,16 @@ const router = createRouter({
       path: '/jedai',
       name: 'Jed AI Chat',
       component: JedAIView,
+    },
+    {
+      path: '/kerjain/:id/edit',
+      name: 'edit kerjain',
+      component: EditKerjainView,
+    },
+    {
+      path: '/kerjain/:id/penawaran',
+      name: 'semua penawaran',
+      component: SemuaPenawaranView,
     },
   ],
 })

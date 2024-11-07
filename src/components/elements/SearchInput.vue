@@ -4,6 +4,15 @@ import SearchIcon from '@/assets/images/SearchIcon.vue'
 const props = defineProps<{
   isBeranda: boolean
 }>()
+
+const emit = defineEmits<{
+  (e: 'search', value: string): void
+}>()
+
+function handleSearch(event: Event) {
+  const target = event.target as HTMLInputElement
+  emit('search', target.value)
+}
 </script>
 
 <template>
@@ -19,6 +28,7 @@ const props = defineProps<{
           ? 'py-4 px-5 placeholder:text-[#AAA5A5]'
           : 'py-3 px-5 placeholder:text-[#AAA5A5]',
       ]"
+      @input="handleSearch"
     />
     <button
       :class="[
