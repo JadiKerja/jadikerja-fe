@@ -81,7 +81,7 @@ async function handleConfirm() {
               Nomor Telepon
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              +62{{ kerjainStore.contactPersonPhone }}
+              +62{{ kerjainStore.phoneNumber }}
             </p>
           </div>
         </div>
@@ -121,7 +121,7 @@ async function handleConfirm() {
               Harga yang ditawarkan
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              Rp{{ kerjainStore.salary }}
+              Rp{{ kerjainStore.price }}
             </p>
           </div>
         </div>

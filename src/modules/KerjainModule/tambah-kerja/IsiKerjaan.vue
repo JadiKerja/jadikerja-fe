@@ -13,11 +13,7 @@ const kerjainStore = useKerjainStore()
 
 function goBack() {
   router.back()
-  kerjainStore.address = ''
-  kerjainStore.title = ''
-  kerjainStore.salary = ''
-  kerjainStore.contactPersonName = ''
-  kerjainStore.contactPersonPhone = ''
+  kerjainStore.resetState()
 }
 
 const canProceed = computed(() => {
@@ -26,7 +22,7 @@ const canProceed = computed(() => {
     kerjainStore.lng &&
     kerjainStore.address &&
     kerjainStore.title &&
-    kerjainStore.salary
+    kerjainStore.price
   )
 })
 </script>
@@ -94,7 +90,7 @@ const canProceed = computed(() => {
         <InputKerjain
           :label="'Harga yang Ditawarkan'"
           :placeholder="'Masukkan Harga'"
-          :field="'salary'"
+          :field="'price'"
         />
       </div>
 

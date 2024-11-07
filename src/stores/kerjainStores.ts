@@ -7,12 +7,12 @@ import { useToast } from 'vue-toast-notification'
 export const useKerjainStore = defineStore('input', {
   state: () => ({
     title: '',
-    salary: '',
+    price: 0,
     address: '',
     lat: null,
     lng: null,
     contactPersonName: '',
-    contactPersonPhone: '',
+    phoneNumber: '',
     isLoading: false,
   }),
 
@@ -27,12 +27,12 @@ export const useKerjainStore = defineStore('input', {
       contactPersonPhone = null,
     }) {
       this.title = title || this.title
-      this.salary = salary || this.salary
+      this.price = salary || this.price
       this.address = address || this.address
       this.lat = lat || this.lat
       this.lng = lng || this.lng
       this.contactPersonName = contactPersonName || this.contactPersonName
-      this.contactPersonPhone = contactPersonPhone || this.contactPersonPhone
+      this.phoneNumber = contactPersonPhone || this.phoneNumber
     },
 
     async createKerjain() {
@@ -50,12 +50,12 @@ export const useKerjainStore = defineStore('input', {
           `${import.meta.env.VITE_API_URL}/kerjain`,
           {
             title: this.title,
-            salary: Number(parseInt(this.salary.replace(/[^\d]/g, ''))),
+            salary: Number(this.price.replace(/[^\d]/g, '')),
             address: this.address,
             lat: this.lat,
             lng: this.lng,
             contactPersonName: this.contactPersonName,
-            contactPersonPhone: this.contactPersonPhone,
+            contactPersonPhone: this.phoneNumber,
           },
           {
             headers: {
@@ -92,7 +92,7 @@ export const useKerjainStore = defineStore('input', {
       this.lat = null
       this.lng = null
       this.contactPersonName = ''
-      this.contactPersonPhone = ''
+      this.phoneNumber = ''
     },
   },
 })

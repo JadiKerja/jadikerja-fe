@@ -11,7 +11,7 @@ const kerjainStore = useKerjainStore()
 
 // Computed property to check if all required fields are filled
 const canProceed = computed(() => {
-  return kerjainStore.contactPersonName && kerjainStore.contactPersonPhone
+  return kerjainStore.contactPersonName && kerjainStore.phoneNumber
 })
 </script>
 
@@ -60,7 +60,7 @@ const canProceed = computed(() => {
         <InputKerjain
           label="Nomor Telepon"
           placeholder="Masukkan Nomor Telepon"
-          field="contactPersonPhone"
+          field="phoneNumber"
         />
       </div>
 
