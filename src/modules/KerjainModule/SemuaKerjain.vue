@@ -17,7 +17,34 @@ onMounted(async () => {
     isLoading.value = true
     await authStore.fetchUserData()
   }
+
+  pekerjaanList.value = await fetchData()
 })
+
+async function fetchData() {
+  try {
+    const token = Cookies.get('accessToken')
+
+    isLoading.value = true
+
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/kerjain/client`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+
+    if (response.data.code === 200) {
+      return response.data.data.kerjain
+    }
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  }
+}
 
 function goBack() {
   router.back()
@@ -53,14 +80,14 @@ function goBack() {
       >
         <SemuaKerjainSaya
           :id="pekerjaan.id"
-          :title="pekerjaan.title"
-          :lat="pekerjaan.lat"
-          :lng="pekerjaan.lng"
-          :salary="pekerjaan.salary"
-          :address="pekerjaan.address"
-          :contactName="pekerjaan.contactPersonName"
-          :contactPhone="pekerjaan.contactPersonPhone"
-          :isOpen="pekerjaan.isOpen"
+          :title="pekerjaan.kerjain.title"
+          :lat="pekerjaan.kerjain.lat"
+          :lng="pekerjaan.kerjain.lng"
+          :salary="pekerjaan.kerjain.salary"
+          :address="pekerjaan.kerjain.address"
+          :contactName="pekerjaan.kerjain.contactPersonName"
+          :contactPhone="pekerjaan.kerjain.contactPersonPhone"
+          :isOpen="pekerjaan.kerjain.isOpen"
         />
       </div>
     </template>

@@ -120,7 +120,7 @@ const router = createRouter({
       component: SemuaPenawaranView,
     },
     {
-      path: '/kerjainsaya',
+      path: '/kerjain-saya',
       name: 'semua kerjain saya',
       component: SemuaKerjainView,
     },

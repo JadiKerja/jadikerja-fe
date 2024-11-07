@@ -100,6 +100,10 @@ function handleLogout() {
           <BuildingIcon />
           Daftar Pekerjaan
         </RouterLink>
+        <RouterLink to="/kerjain-saya" class="flex flex-row gap-8 items-center">
+          <LamaranIcon />
+          KerjaIN Saya
+        </RouterLink>
         <RouterLink to="/profile/snk" class="flex flex-row gap-8 items-center">
           <InfoIcon />
           Syarat dan Ketentuan
