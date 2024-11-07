@@ -2,56 +2,59 @@
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import WhiteBackButton from '@/components/elements/button/WhiteBackButton.vue'
 import AllChatCard from '@/components/elements/card/AllChatCard.vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
+const route = useRoute()
 const router = useRouter()
+const isLoading = ref(true)
+const chatList = ref([])
 
 function goBack() {
   router.back()
 }
 
-const chatList = [
-  {
-    id: '1',
-    name: 'John Doe',
-    address: 'Jakarta, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150',
-  },
-  {
-    id: '2',
-    name: 'Jane Smith',
-    address: 'Bandung, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150',
-  },
-  {
-    id: '3',
-    name: 'Robert Johnson',
-    address: 'Surabaya, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150',
-  },
-  {
-    id: '4',
-    name: 'Emily Davis',
-    address: 'Medan, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150',
-  },
-  {
-    id: '5',
-    name: 'Michael Brown',
-    address: 'Yogyakarta, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150',
-  },
-  {
-    id: '6',
-    name: 'Sarah Wilson',
-    address: 'Bali, Indonesia',
-    profileUrl: 'https://via.placeholder.com/150',
-  },
-]
+async function fetchKerjainData() {
+  const token = Cookies.get('accessToken')
+  const id = route.params.id
+  if (token) {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/kerjain/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      chatList.value = response.data.data.kerjain.kerjainApply
+      console.log(chatList)
+    } catch (error) {
+      console.error('Error fetching Kerjain data:', error)
+    } finally {
+      isLoading.value = false
+    }
+  } else {
+    console.error('No access token found.')
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchKerjainData()
+})
 </script>
 
 <template>
-  <div class="h-screen flex flex-col items-center w-full">
+  <div
+    v-if="isLoading"
+    class="h-screen flex justify-center items-center w-full"
+  >
+    <p>Loading...</p>
+  </div>
+  <div v-else class="h-screen flex flex-col items-center w-full">
     <div
       class="bg-[rgb(214,39,39)] flex flex-col items-center relative w-full pb-[4.5rem] pt-[3rem] px-7 gap-6 overflow-hidden"
     >
@@ -80,13 +83,20 @@ const chatList = [
       class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col px-7 pb-7 pt-5 gap-4 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
     >
       <p class="text-black text-[1.25rem] font-semibold">Penawaran kamu</p>
-      <div v-for="(chat, index) in chatList" :key="index">
+      <div
+        v-if="chatList.length > 0"
+        v-for="(chat, index) in chatList"
+        :key="index"
+      >
         <AllChatCard
           :id="chat.id"
-          :name="chat.name"
-          :address="chat.address"
+          :name="chat.fullName"
+          :address="chat.domicile"
           :profileUrl="chat.profileUrl"
         />
+      </div>
+      <div v-else>
+        <p class="text-gray-500 text-center">No data available</p>
       </div>
     </div>
   </div>
