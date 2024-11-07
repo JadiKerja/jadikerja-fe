@@ -21,11 +21,14 @@ async function fetchKerjainData() {
   const id = route.params.id
   if (token) {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/kerjain/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/kerjain/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       chatList.value = response.data.data.kerjain.kerjainApply
       console.log(chatList)
     } catch (error) {
@@ -45,7 +48,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="isLoading" class="h-screen flex justify-center items-center w-full">
+  <div
+    v-if="isLoading"
+    class="h-screen flex justify-center items-center w-full"
+  >
     <p>Loading...</p>
   </div>
   <div v-else class="h-screen flex flex-col items-center w-full">
@@ -77,7 +83,11 @@ onMounted(() => {
       class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col px-7 pb-7 pt-5 gap-4 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
     >
       <p class="text-black text-[1.25rem] font-semibold">Penawaran kamu</p>
-      <div v-if="chatList.length > 0" v-for="(chat, index) in chatList" :key="index">
+      <div
+        v-if="chatList.length > 0"
+        v-for="(chat, index) in chatList"
+        :key="index"
+      >
         <AllChatCard
           :id="chat.id"
           :name="chat.fullName"
