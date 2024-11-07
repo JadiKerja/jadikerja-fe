@@ -13,16 +13,16 @@ const kerjainStore = useKerjainStore()
 
 function goBack() {
   router.back()
-  kerjainStore.detailAddress = ''
-  kerjainStore.jobType = ''
-  kerjainStore.price = ''
-  kerjainStore.name = ''
-  kerjainStore.phoneNumber = ''
+  kerjainStore.resetState()
 }
 
 const canProceed = computed(() => {
   return (
-    kerjainStore.detailAddress && kerjainStore.jobType && kerjainStore.price
+    kerjainStore.lat &&
+    kerjainStore.lng &&
+    kerjainStore.address &&
+    kerjainStore.title &&
+    kerjainStore.price
   )
 })
 </script>
@@ -63,19 +63,29 @@ const canProceed = computed(() => {
           Pekerjaan apa yang mitra kami bisa bantu?
         </p>
       </div>
-      <div class="w-full">
+      <div class="w-full flex flex-col gap-[0.3125rem]">
         <p class="text-[0.875rem] text-black font-semibold">Alamat</p>
+        <RouterLink
+          to="/kerjain/pick-location"
+          class="pr-4 border-[1.506px] border-solid px-4 py-4 rounded-[0.6275rem] flex items-center bg-white hover:bg-[#E55A2466] w-full text-black placeholder:text-[#AEACAC] transition-all"
+        >
+          <span v-if="kerjainStore.lat && kerjainStore.lng">
+            <p>Lat: {{ kerjainStore.lat }}</p>
+            <p>Lng: {{ kerjainStore.lng }}</p>
+          </span>
+          <p v-else>Pilih lokasi Anda</p>
+        </RouterLink>
       </div>
       <div class="flex flex-col gap-4">
         <InputKerjain
           :label="'Detail Alamat'"
           :placeholder="'Masukkan Detail Alamat'"
-          :field="'detailAddress'"
+          :field="'address'"
         />
         <InputKerjain
           :label="'Jenis Pekerjaan'"
           :placeholder="'Masukkan Jenis Pekerjaan'"
-          :field="'jobType'"
+          :field="'title'"
         />
         <InputKerjain
           :label="'Harga yang Ditawarkan'"

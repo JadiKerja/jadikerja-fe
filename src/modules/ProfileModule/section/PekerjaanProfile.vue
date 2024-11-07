@@ -81,6 +81,7 @@ function goBack() {
           :address="pekerjaan.address"
           :contactName="pekerjaan.contactPersonName"
           :contactPhone="pekerjaan.contactPersonPhone"
+          :isOpen="pekerjaan.isOpen"
         />
       </div>
     </template>

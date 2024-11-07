@@ -13,17 +13,15 @@ const kerjainStore = useKerjainStore()
 
 function goBack() {
   router.back()
-  kerjainStore.detailAddress = ''
-  kerjainStore.jobType = ''
-  kerjainStore.price = ''
-  kerjainStore.name = ''
+  kerjainStore.address = ''
+  kerjainStore.title = ''
+  kerjainStore.price = null
+  kerjainStore.contactPersonName = ''
   kerjainStore.phoneNumber = ''
 }
 
 const canProceed = computed(() => {
-  return (
-    kerjainStore.detailAddress && kerjainStore.jobType && kerjainStore.price
-  )
+  return kerjainStore.address && kerjainStore.title && kerjainStore.price
 })
 </script>
 
@@ -70,12 +68,12 @@ const canProceed = computed(() => {
         <InputKerjain
           :label="'Detail Alamat'"
           :placeholder="'Masukkan Detail Alamat'"
-          :field="'detailAddress'"
+          :field="'address'"
         />
         <InputKerjain
           :label="'Jenis Pekerjaan'"
           :placeholder="'Masukkan Jenis Pekerjaan'"
-          :field="'jobType'"
+          :field="'title'"
         />
         <InputKerjain
           :label="'Harga yang Ditawarkan'"
