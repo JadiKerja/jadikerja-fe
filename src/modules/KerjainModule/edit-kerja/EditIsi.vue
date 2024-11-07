@@ -13,15 +13,17 @@ const kerjainStore = useKerjainStore()
 
 function goBack() {
   router.back()
-  kerjainStore.address = ''
-  kerjainStore.title = ''
-  kerjainStore.salary = ''
-  kerjainStore.contactPersonName = ''
-  kerjainStore.contactPersonPhone = ''
+  kerjainStore.resetState()
 }
 
 const canProceed = computed(() => {
-  return kerjainStore.address && kerjainStore.title && kerjainStore.salary
+  return (
+    kerjainStore.lat &&
+    kerjainStore.lng &&
+    kerjainStore.address &&
+    kerjainStore.title &&
+    kerjainStore.price
+  )
 })
 </script>
 
@@ -46,7 +48,7 @@ const canProceed = computed(() => {
         <WhiteBackButton class="" @click="goBack" />
 
         <p class="text-[1.5rem] font-bold text-white tracking-[0.01563rem]">
-          Tambah Kerjaan
+          Edit Kerjaan
         </p>
         <div></div>
       </div>
@@ -63,6 +65,22 @@ const canProceed = computed(() => {
       </div>
       <div class="w-full">
         <p class="text-[0.875rem] text-black font-semibold">Alamat</p>
+        <RouterLink
+          to="/kerjain/pick-location"
+          class="pr-4 border-[1.506px] border-solid px-4 py-4 rounded-[0.6275rem] flex items-center bg-white hover:bg-[#E55A2466] w-full text-black placeholder:text-[#AEACAC] transition-all"
+        >
+          <span v-if="kerjainStore.lat && kerjainStore.lng">
+            <p>
+              Lat:
+              {{ kerjainStore.newLat ? kerjainStore.newLat : kerjainStore.lat }}
+            </p>
+            <p>
+              Lng:
+              {{ kerjainStore.newLng ? kerjainStore.newLng : kerjainStore.lng }}
+            </p>
+          </span>
+          <p v-else>Pilih lokasi Anda</p>
+        </RouterLink>
       </div>
       <div class="flex flex-col gap-4">
         <InputKerjain
@@ -78,7 +96,7 @@ const canProceed = computed(() => {
         <InputKerjain
           :label="'Harga yang Ditawarkan'"
           :placeholder="'Masukkan Harga'"
-          :field="'salary'"
+          :field="'price'"
         />
       </div>
 

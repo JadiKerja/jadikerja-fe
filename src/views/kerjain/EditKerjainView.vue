@@ -22,6 +22,7 @@ const kerjainStore = useKerjainStore()
 async function fetchKerjainData() {
   const token = Cookies.get('accessToken')
   const id = route.params.id
+  kerjainStore.setState({ id })
   if (token) {
     try {
       const response = await axios.get(

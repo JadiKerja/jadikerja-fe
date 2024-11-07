@@ -33,8 +33,16 @@ function handlePanToMyLocation() {
 }
 
 function handleSaveLocation() {
-  kerjainStore.setState({ lat: position.value.lat, lng: position.value.lng })
-  router.replace('/kerjain/add')
+  if (kerjainStore.id) {
+    kerjainStore.setState({
+      newLat: position.value.lat,
+      newLng: position.value.lng,
+    })
+    router.replace(`/kerjain/${kerjainStore.id}/edit`)
+  } else {
+    kerjainStore.setState({ lat: position.value.lat, lng: position.value.lng })
+    router.replace('/kerjain/add')
+  }
 }
 </script>
 
