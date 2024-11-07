@@ -27,36 +27,32 @@ const props = defineProps({
           </p>
           <div class="flex flex-row gap-1">
             <LocationPin />
-            <p
-              class="text-[0.875rem] font-medium text-[#AEACAC] tracking-[.00906rem] -mt-[2px]"
-            >
+            <p class="text-[0.875rem] font-medium text-[#AEACAC] tracking-[.00906rem] -mt-[2px]">
               {{ props.address }}
             </p>
           </div>
           <div class="flex flex-row gap-1">
             <ProfilePin />
-            <p
-              class="text-[0.875rem] font-medium text-[#AEACAC] tracking-[.00906rem] -mt-[2px]"
-            >
+            <p class="text-[0.875rem] font-medium text-[#AEACAC] tracking-[.00906rem] -mt-[2px]">
               {{ props.contactName }}
             </p>
           </div>
         </div>
       </div>
       <div class="flex flex-row gap-1 items-center justify-center self-start">
-        <img src="@/assets/images/green-checklist.svg" alt="Checklist" />
+        <img src="@/assets/images/green-checklist.svg" alt="Checklist">
         <p class="font-bold tracking-[.01131rem]">Rp{{ props.salary }}</p>
       </div>
     </div>
     <div class="flex w-full gap-2">
       <RouterLink
-        :to="`/profile/pekerjaan/edit/${props.id}`"
+        :to="`/kerjain/${props.id}/edit`"
         class="w-[80px] py-2 text-[10px] bg-[#D62727] hover:bg-[#771515] text-white font-semibold text-center rounded-[18px] transition-all"
       >
         Edit
       </RouterLink>
       <RouterLink
-        :to="`/pekerjaan/${props.id}`"
+        :to="`/kerjain/${props.id}/penawaran`"
         class="w-[80px] py-2 text-[10px] bg-[#F4A91E] hover:bg-[#d39626] text-white font-semibold text-center rounded-[18px] transition-all"
       >
         Penawaran
@@ -65,7 +61,7 @@ const props = defineProps({
         class="w-[80px] py-2 text-[10px] bg-[#198f51] hover:bg-[#d39626] text-white font-semibold text-center rounded-[18px] transition-all"
       >
         Selesaikan
-      </button>
+    </button>
     </div>
   </div>
 </template>
