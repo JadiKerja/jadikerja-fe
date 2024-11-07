@@ -68,8 +68,7 @@ async function handleSubmit() {
     emit('submit')
   } catch (error) {
     console.error('Error submitting profile:', error)
-    imageUploadError.value =
-      'Maksimal image size 1MB'
+    imageUploadError.value = 'Maksimal image size 1MB'
   } finally {
     isLoading.value = false
   }
