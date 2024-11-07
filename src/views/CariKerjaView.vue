@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from '@/components/elements/Navbar.vue'
-import CariKerja from '@/modules/CariKerjaModule/CariKerja.vue';
+import CariKerja from '@/modules/CariKerjaModule/CariKerja.vue'
 </script>
 
 <template>

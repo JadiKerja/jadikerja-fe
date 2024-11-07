@@ -71,7 +71,9 @@ const remainingTagCount = computed(
       >
         Lihat Detail
       </RouterLink>
-      <div class="px-[0.62rem] py-[0.31rem] bg-[#E55A24] text-[#FFFFFF] text-[0.625rem] font-semibold rounded-[0.3125rem] flex items-center justify-center">
+      <div
+        class="px-[0.62rem] py-[0.31rem] bg-[#E55A24] text-[#FFFFFF] text-[0.625rem] font-semibold rounded-[0.3125rem] flex items-center justify-center"
+      >
         {{ salary }}
       </div>
     </div>
