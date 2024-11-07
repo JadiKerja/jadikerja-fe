@@ -15,6 +15,7 @@ import KerjainChatView from '../views/kerjain/KerjainChatView.vue'
 import AddKerjainView from '@/views/kerjain/AddKerjainView.vue'
 import CariKerjaView from '@/views/CariKerjaView.vue'
 import UpgradeDiriView from '@/views/UpgradeDiriView.vue'
+import JedAIView from '@/views/jedai/JedAIView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -100,6 +101,11 @@ const router = createRouter({
       path: '/upgrade',
       name: 'upgrade diri',
       component: UpgradeDiriView,
+    },
+    {
+      path: '/jedai',
+      name: 'Jed AI Chat',
+      component: JedAIView,
     },
   ],
 })
