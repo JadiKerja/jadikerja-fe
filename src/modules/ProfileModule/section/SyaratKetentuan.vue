@@ -52,6 +52,16 @@ onMounted(async () => {
     <div
       class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col p-7 gap-5 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
     >
+    <div class="flex flex-col gap-2">
+        <p
+          class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
+        >
+          JadiKerja
+        </p>
+        <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+          JadiKerja adalah aplikasi yang membantu pencari kerja menemukan pekerjaan sesuai kebutuhan mereka. Dengan fitur pencarian pekerjaan, pengembangan keterampilan, dan rekomendasi khusus, kami berkomitmen untuk mendukung masyarakat dalam mencapai peluang kerja yang lebih baik.
+        </p>
+      </div>
       <div class="flex flex-col gap-2">
         <p
           class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
@@ -59,52 +69,88 @@ onMounted(async () => {
           Kebijakan Privasi Pengguna
         </p>
         <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat
-          erat at turpis pharetra, quis gravida nunc venenatis. Suspendisse
-          aliquam lectus et orci gravida tempor non quis sapien. Proin porttitor
-          libero in elementum finibus. Ut tellus eros, imperdiet vitae orci ut,
-          posuere placerat diam. Aliquam erat volutpat. Sed et malesuada mi. Sed
-          rhoncus tincidunt felis, in venenatis nisi cursus vel. Suspendisse
-          ornare eros sit amet magna molestie tincidunt. Proin tempor feugiat
-          sapien sed dignissim. Donec volutpat tellus luctus, gravida nibh nec,
-          rutrum augue
+          Di JadiKerja, kami menghargai privasi dan keamanan data pengguna kami. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi yang Anda berikan melalui aplikasi JadiKerja.
         </p>
       </div>
       <div class="flex flex-col gap-2">
         <p
           class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
         >
-          JadiKerja
+          Pengumpulan Informasi
         </p>
         <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat
-          erat at turpis pharetra, quis gravida nunc venenatis. Suspendisse
-          aliquam lectus et orci gravida tempor non quis sapien. Proin porttitor
-          libero in elementum finibus. Ut tellus eros, imperdiet vitae orci ut,
-          posuere placerat diam. Aliquam erat volutpat. Sed et malesuada mi. Sed
-          rhoncus tincidunt felis, in venenatis nisi cursus vel. Suspendisse
-          ornare eros sit amet magna molestie tincidunt. Proin tempor feugiat
-          sapien sed dignissim. Donec volutpat tellus luctus, gravida nibh nec,
-          rutrum augue
+          Kami mengumpulkan informasi yang Anda berikan secara langsung saat mendaftar, seperti nama, alamat email, nomor telepon, serta informasi pekerjaan dan keterampilan. Kami juga dapat mengumpulkan data tambahan seperti lokasi dan preferensi pekerjaan untuk menyediakan layanan yang lebih sesuai dengan kebutuhan Anda.        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]">
+          Penggunaan Informasi
+        </p>
+        <div class="flex flex-col gap-1">
+          <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+            Data yang kami kumpulkan digunakan untuk:
+          </p>
+          
+          <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+            Menghubungkan Anda dengan pekerjaan yang sesuai, memberikan rekomendasi pekerjaan dan pelatihan, mengelola akun Anda, memperbarui Anda mengenai perubahan pada kebijakan kami, memastikan keamanan layanan kami dan mencegah penipuan.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p
+          class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
+        >
+          Pilihan Pengguna
+        </p>
+        <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+          Anda memiliki hak untuk memperbarui, mengubah, atau menghapus informasi pribadi Anda kapan saja melalui pengaturan akun. Anda juga dapat memilih untuk tidak menerima pemberitahuan tertentu dari kami.
         </p>
       </div>
       <div class="flex flex-col gap-2">
         <p
           class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
         >
-          Ketentuan
+          Pilihan Pengguna
         </p>
         <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat
-          erat at turpis pharetra, quis gravida nunc venenatis. Suspendisse
-          aliquam lectus et orci gravida tempor non quis sapien. Proin porttitor
-          libero in elementum finibus. Ut tellus eros, imperdiet vitae orci ut,
-          posuere placerat diam. Aliquam erat volutpat. Sed et malesuada mi. Sed
-          rhoncus tincidunt felis, in venenatis nisi cursus vel. Suspendisse
-          ornare eros sit amet magna molestie tincidunt. Proin tempor feugiat
-          sapien sed dignissim. Donec volutpat tellus luctus, gravida nibh nec,
-          rutrum augue
+          Anda memiliki hak untuk memperbarui, mengubah, atau menghapus informasi pribadi Anda kapan saja melalui pengaturan akun. Anda juga dapat memilih untuk tidak menerima pemberitahuan tertentu dari kami.
         </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p
+          class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
+        >
+          Penggunaan Layanan
+        </p>
+        <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+          Pengguna diharapkan menggunakan aplikasi ini hanya untuk mencari pekerjaan atau mengakses pelatihan yang disediakan. Penyalahgunaan, seperti memberikan informasi palsu atau menyalahgunakan data pengguna lain, akan mengakibatkan penangguhan akun.
+        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p
+          class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
+        >
+        Konten dan Tanggung Jawab Pengguna
+      </p>
+        <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+          Anda bertanggung jawab atas informasi yang Anda unggah di aplikasi JadiKerja, termasuk informasi pribadi dan pengalaman kerja. Kami tidak bertanggung jawab atas ketepatan atau kebenaran informasi yang diunggah oleh pengguna lain.        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p
+          class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
+        >
+        Keamanan dan Privasi
+        </p>
+        <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+          Anda setuju untuk menjaga keamanan akun Anda dan tidak membagikan kata sandi atau informasi akun Anda kepada orang lain. Jika ada pelanggaran keamanan atau kehilangan akses, segera hubungi tim dukungan kami.        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p
+          class="text-[0.875rem] text-black font-semibold tracking-[.01094rem]"
+        >
+        Perubahan Kebijakan
+              </p>
+        <p class="text-[0.75rem] tracking-[0.00938rem] text-[#AEACAC]">
+          Kami dapat memperbarui Kebijakan Privasi dan Ketentuan Penggunaan dari waktu ke waktu untuk mencerminkan perubahan layanan atau hukum yang berlaku. Kami akan memberi tahu Anda jika ada perubahan signifikan melalui aplikasi atau email.                </p>
       </div>
     </div>
   </div>
