@@ -51,7 +51,11 @@ const canProceed = computed(() => {
         </p>
       </div>
       <div class="flex flex-col gap-4">
-        <InputKerjain label="Nama" placeholder="Masukkan Nama" field="contactPersonName" />
+        <InputKerjain
+          label="Nama"
+          placeholder="Masukkan Nama"
+          field="contactPersonName"
+        />
         <InputKerjain
           label="Nomor Telepon"
           placeholder="Masukkan Nomor Telepon"

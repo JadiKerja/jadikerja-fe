@@ -21,9 +21,7 @@ function goBack() {
 }
 
 const canProceed = computed(() => {
-  return (
-    kerjainStore.address && kerjainStore.title && kerjainStore.salary
-  )
+  return kerjainStore.address && kerjainStore.title && kerjainStore.salary
 })
 </script>
 
