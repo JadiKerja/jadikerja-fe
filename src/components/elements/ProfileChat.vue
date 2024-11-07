@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
-const props = defineProps<{ url: string }>();
+const props = defineProps<{ url: string }>()
 </script>
 
 <template>

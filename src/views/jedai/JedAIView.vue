@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import JedAIRoomChat from '@/modules/UpgradeDiriModule/JedAIModule/JedAIRoomChat.vue';
-
+import JedAIRoomChat from '@/modules/UpgradeDiriModule/JedAIModule/JedAIRoomChat.vue'
 </script>
 
 <template>

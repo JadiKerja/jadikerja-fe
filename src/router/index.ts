@@ -105,8 +105,8 @@ const router = createRouter({
     {
       path: '/jedai',
       name: 'Jed AI Chat',
-      component: JedAIView
-    }
+      component: JedAIView,
+    },
   ],
 })
 
