@@ -122,8 +122,8 @@ const router = createRouter({
     {
       path: '/kerjainsaya',
       name: 'semua kerjain saya',
-      component: SemuaKerjainView
-    }
+      component: SemuaKerjainView,
+    },
   ],
 })
 
