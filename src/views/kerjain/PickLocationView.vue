@@ -33,7 +33,7 @@ function handlePanToMyLocation() {
 }
 
 function handleSaveLocation() {
-  kerjainStore.setState({ lat: 0, lng: 0 })
+  kerjainStore.setState({ lat: position.value.lat, lng: position.value.lng })
   router.replace('/kerjain/add')
 }
 </script>

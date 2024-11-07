@@ -9,13 +9,10 @@ import { useKerjainStore } from '@/stores/kerjainStores'
 const kerjainStore = useKerjainStore()
 const emit = defineEmits(['next', 'back', 'editIsiKerjaan'])
 
-function handleConfirm() {
+async function handleConfirm() {
+  await kerjainStore.createKerjain()
   emit('next')
-  kerjainStore.address = ''
-  kerjainStore.title = ''
-  kerjainStore.salary = ''
-  kerjainStore.contactPersonName = ''
-  kerjainStore.contactPersonPhone = ''
+  kerjainStore.resetState()
 }
 </script>
 
@@ -84,7 +81,7 @@ function handleConfirm() {
               Nomor Telepon
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              +62{{ kerjainStore.contactPersonPhone }}
+              +62{{ kerjainStore.phoneNumber }}
             </p>
           </div>
         </div>
@@ -124,7 +121,7 @@ function handleConfirm() {
               Harga yang ditawarkan
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              Rp{{ kerjainStore.salary }}
+              Rp{{ kerjainStore.price }}
             </p>
           </div>
         </div>
@@ -134,7 +131,7 @@ function handleConfirm() {
         @click="handleConfirm"
         class="w-full py-[0.8125rem] text-white bg-[#D62727] text-center font-semibold rounded-[0.9375rem]"
       >
-        Konfirmasi
+        {{ kerjainStore.isLoading ? '...' : 'Konfirmasi' }}
       </button>
     </div>
   </div>

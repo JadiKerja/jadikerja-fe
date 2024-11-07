@@ -13,11 +13,7 @@ const kerjainStore = useKerjainStore()
 
 function goBack() {
   router.back()
-  kerjainStore.address = ''
-  kerjainStore.title = ''
-  kerjainStore.salary = ''
-  kerjainStore.contactPersonName = ''
-  kerjainStore.contactPersonPhone = ''
+  kerjainStore.resetState()
 }
 
 const canProceed = computed(() => {
@@ -26,7 +22,7 @@ const canProceed = computed(() => {
     kerjainStore.lng &&
     kerjainStore.address &&
     kerjainStore.title &&
-    kerjainStore.salary
+    kerjainStore.price
   )
 })
 </script>
@@ -73,11 +69,11 @@ const canProceed = computed(() => {
           to="/kerjain/pick-location"
           class="pr-4 border-[1.506px] border-solid px-4 py-4 rounded-[0.6275rem] flex items-center bg-white hover:bg-[#E55A2466] w-full text-black placeholder:text-[#AEACAC] transition-all"
         >
-          {{
-            kerjainStore.lat && kerjainStore.lng
-              ? `Lat: ${kerjainStore.lat} Lng: ${kerjainStore.lng}`
-              : 'Pilih lokasi Anda'
-          }}
+          <span v-if="kerjainStore.lat && kerjainStore.lng">
+            <p>Lat: {{ kerjainStore.lat }}</p>
+            <p>Lng: {{ kerjainStore.lng }}</p>
+          </span>
+          <p v-else>Pilih lokasi Anda</p>
         </RouterLink>
       </div>
       <div class="flex flex-col gap-4">
@@ -94,7 +90,7 @@ const canProceed = computed(() => {
         <InputKerjain
           :label="'Harga yang Ditawarkan'"
           :placeholder="'Masukkan Harga'"
-          :field="'salary'"
+          :field="'price'"
         />
       </div>
 
