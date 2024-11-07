@@ -3,6 +3,7 @@ import SearchIcon from '@/assets/images/SearchIcon.vue'
 
 const props = defineProps<{
   isBeranda: boolean
+  isCariKerja?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -20,7 +21,7 @@ function handleSearch(event: Event) {
     <input
       type="text"
       :placeholder="
-        isBeranda ? 'Cari kerja gak pake ribet di sini!' : 'Cari materi disini'
+        isBeranda ? 'Cari kerja gak pake ribet di sini!' : isCariKerja ? 'Cari pekerjaan yang kamu inginkan' : 'Cari materi disini'
       "
       :class="[
         'text-[0.753rem] font-medium text-[#0A0E32] bg-white w-full rounded-l-[0.6275rem]',
