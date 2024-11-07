@@ -2,7 +2,12 @@
 import ChecklistIcon from '@/assets/images/ChecklistIcon.vue'
 import LocationPin from '@/assets/images/LocationPin.vue'
 import ProfilePin from '@/assets/images/ProfilePin.vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+import axios from 'axios'
+import { ref } from 'vue'
+import Cookies from 'js-cookie'
+
+const router = useRouter()
 
 const props = defineProps({
   id: String,
@@ -13,7 +18,39 @@ const props = defineProps({
   address: String,
   contactName: String,
   contactPhone: String,
+  isOpen: Boolean,
 })
+
+const isSubmitting = ref(false)
+const isMarkedAsDone = ref(props.isOpen)
+
+async function handleMarkAsDone() {
+  const token = Cookies.get('accessToken')
+  if (token) {
+    try {
+      isSubmitting.value = true
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/kerjain/mark-as-done`,
+        {
+          id: props.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      console.log('Success:', response.data)
+      isMarkedAsDone.value = true
+    } catch (error) {
+      console.error('Error marking as done:', error)
+    } finally {
+      isSubmitting.value = false
+    }
+  } else {
+    router.push('/login')
+  }
+}
 </script>
 
 <template>
@@ -62,9 +99,13 @@ const props = defineProps({
         Penawaran
       </RouterLink>
       <button
-        class="w-[80px] py-2 text-[10px] bg-[#198f51] hover:bg-[#d39626] text-white font-semibold text-center rounded-[18px] transition-all"
+        v-if="!isMarkedAsDone && isOpen"
+        @click="handleMarkAsDone"
+        :disabled="isSubmitting"
+        class="w-[80px] py-2 text-[10px] bg-[#198f51] hover:bg-[#146838] text-white font-semibold text-center rounded-[18px] transition-all"
       >
-        Selesaikan
+        <span v-if="!isSubmitting">Selesaikan</span>
+        <span v-else>Loading...</span>
       </button>
     </div>
   </div>
