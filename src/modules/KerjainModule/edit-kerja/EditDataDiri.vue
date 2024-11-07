@@ -10,7 +10,7 @@ const emit = defineEmits(['next', 'back'])
 const kerjainStore = useKerjainStore()
 
 const canProceed = computed(() => {
-  return kerjainStore.contactPersonName && kerjainStore.contactPersonPhone
+  return kerjainStore.contactPersonName && kerjainStore.phoneNumber
 })
 </script>
 
@@ -59,7 +59,7 @@ const canProceed = computed(() => {
         <InputKerjain
           label="Nomor Telepon"
           placeholder="Masukkan Nomor Telepon"
-          field="contactPersonPhone"
+          field="phoneNumber"
         />
       </div>
 

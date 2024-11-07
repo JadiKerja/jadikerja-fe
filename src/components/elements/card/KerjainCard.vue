@@ -99,7 +99,7 @@ async function handleMarkAsDone() {
         Penawaran
       </RouterLink>
       <button
-        v-if="!isMarkedAsDone && isOpen"
+        v-if="isMarkedAsDone"
         @click="handleMarkAsDone"
         :disabled="isSubmitting"
         class="w-[80px] py-2 text-[10px] bg-[#198f51] hover:bg-[#146838] text-white font-semibold text-center rounded-[18px] transition-all"
