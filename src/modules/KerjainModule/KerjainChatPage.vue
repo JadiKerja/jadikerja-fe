@@ -13,6 +13,7 @@ import { io } from 'socket.io-client'
 import { useToast } from 'vue-toast-notification'
 import { uuid } from 'vue-uuid'
 import DateChip from './module-elements/DateChip.vue'
+import SentIcon from '@/assets/images/SentIcon.vue'
 
 const messages = ref([])
 const groupedMessages = ref(groupMessagesByDate(messages.value))
@@ -267,7 +268,12 @@ watch(groupedMessages, scrollToBottom)
         class="w-full bg-transparent outline-none focus:outline-none"
         @keydown="handleKeyDown"
       ></textarea>
-      <button class="min-w-[42px] h-[42px] bg-[#D62727] rounded-full"></button>
+      <button
+        class="min-w-[42px] h-[42px] bg-[#D62727] p-2 rounded-full"
+        @click="handleSendMessage"
+      >
+        <SentIcon />
+      </button>
     </div>
   </div>
 </template>
