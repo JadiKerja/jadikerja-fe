@@ -5,9 +5,9 @@ import ProfilePin from '@/assets/images/ProfilePin.vue'
 import { RouterLink, useRouter } from 'vue-router'
 import axios from 'axios'
 import { ref } from 'vue'
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 
-const router = useRouter();
+const router = useRouter()
 
 const props = defineProps({
   id: String,
@@ -29,13 +29,17 @@ async function handleMarkAsDone() {
   if (token) {
     try {
       isSubmitting.value = true
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/kerjain/mark-as-done`, {
-        id: props.id,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      })
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/kerjain/mark-as-done`,
+        {
+          id: props.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
       console.log('Success:', response.data)
       isMarkedAsDone.value = true
     } catch (error) {
