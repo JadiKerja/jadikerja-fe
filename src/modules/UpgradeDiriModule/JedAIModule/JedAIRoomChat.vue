@@ -9,8 +9,8 @@ import SentIcon from '@/assets/images/SentIcon.vue'
 import ChatCard from '@/components/elements/ChatCard.vue'
 
 const message = ref('')
-const ListChat = ref<{ role: string, text: string }[]>([
-  { role: 'ASSISTANT', text: 'Halo! Adakah yang bisa Jed bantu?' }
+const ListChat = ref<{ role: string; text: string }[]>([
+  { role: 'ASSISTANT', text: 'Halo! Adakah yang bisa Jed bantu?' },
 ])
 
 const chatContainerRef = ref<HTMLElement | null>(null)
@@ -91,25 +91,24 @@ onMounted(async () => {
       />
     </div>
     <div
-      class="w-full z-30 flex flex-col items-center fixed bottom-0 max-w-[393px] px-5 bg-[#F8FAFF]">
+      class="w-full z-30 flex flex-col items-center fixed bottom-0 max-w-[393px] px-5 bg-[#F8FAFF]"
+    >
       <div class="w-full h-[1px] bg-[#E9E9E9]"></div>
-        <div
-          class="w-full flex flex-row items-center gap-2 py-4"
+      <div class="w-full flex flex-row items-center gap-2 py-4">
+        <textarea
+          v-model="message"
+          class="py-4 w-full bg-[#F8FAFF] placeholder:text-[#A4A5AB] px-3 focus:outline-none focus:border-none resize-none custom-scrollbar-hidden"
+          placeholder="Tuliskan pesanmu disini..."
+          @input="scrollToBottom"
+          @keydown.enter="handleSendMessage"
+          rows="1"
+        ></textarea>
+        <button
+          class="bg-[#D62727] p-2 rounded-full"
+          @click="handleSendMessage"
         >
-          <textarea
-            v-model="message"
-            class="py-4 w-full bg-[#F8FAFF] placeholder:text-[#A4A5AB] px-3 focus:outline-none focus:border-none resize-none custom-scrollbar-hidden"
-            placeholder="Tuliskan pesanmu disini..."
-            @input="scrollToBottom"
-            @keydown.enter="handleSendMessage"
-            rows="1"
-          ></textarea>
-          <button
-            class="bg-[#D62727] p-2 rounded-full"
-            @click="handleSendMessage"
-          >
-            <SentIcon />
-          </button>
+          <SentIcon />
+        </button>
       </div>
     </div>
   </div>
