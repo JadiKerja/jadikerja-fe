@@ -21,7 +21,7 @@ const { chat, profileUrl } = defineProps<{
     <img
       :src="profileUrl"
       alt="user-profile-image"
-      class="w-[40px] h-[40px] rounded-full"
+      class="w-[40px] min-w-[40px] h-[40px] rounded-full overflow-hidden"
     />
   </div>
 </template>

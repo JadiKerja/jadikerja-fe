@@ -87,12 +87,14 @@ async function handleMarkAsDone() {
     </div>
     <div class="flex w-full gap-2">
       <RouterLink
+        v-if="isMarkedAsDone"
         :to="`/kerjain/${props.id}/edit`"
         class="w-[80px] py-2 text-[10px] bg-[#D62727] hover:bg-[#771515] text-white font-semibold text-center rounded-[18px] transition-all"
       >
         Edit
       </RouterLink>
       <RouterLink
+        v-if="isMarkedAsDone"
         :to="`/kerjain/${props.id}/penawaran`"
         class="w-[80px] py-2 text-[10px] bg-[#F4A91E] hover:bg-[#d39626] text-white font-semibold text-center rounded-[18px] transition-all"
       >
@@ -107,6 +109,11 @@ async function handleMarkAsDone() {
         <span v-if="!isSubmitting">Selesaikan</span>
         <span v-else>Loading...</span>
       </button>
+      <span
+        v-if="!isMarkedAsDone"
+        class="w-full py-2 text-[10px] bg-[#198f51] text-white font-semibold text-center rounded-[18px]"
+        >Selesai</span
+      >
     </div>
   </div>
 </template>

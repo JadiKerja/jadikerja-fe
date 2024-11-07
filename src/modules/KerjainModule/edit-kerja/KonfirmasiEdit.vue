@@ -9,13 +9,10 @@ import { useKerjainStore } from '@/stores/kerjainStores'
 const kerjainStore = useKerjainStore()
 const emit = defineEmits(['next', 'back', 'editIsiKerjaan'])
 
-function handleConfirm() {
+async function handleConfirm() {
+  await kerjainStore.editKerjain()
   emit('next')
-  kerjainStore.address = ''
-  kerjainStore.title = ''
-  kerjainStore.price = null
-  kerjainStore.contactPersonName = ''
-  kerjainStore.phoneNumber = ''
+  kerjainStore.resetState()
 }
 </script>
 
@@ -134,7 +131,7 @@ function handleConfirm() {
         @click="handleConfirm"
         class="w-full py-[0.8125rem] text-white bg-[#D62727] text-center font-semibold rounded-[0.9375rem]"
       >
-        Edit
+        {{ kerjainStore.isLoading ? '...' : 'Edit' }}
       </button>
     </div>
   </div>

@@ -35,7 +35,7 @@ const canProceed = computed(() => {
         <WhiteBackButton class="" @click="emit('back')" />
 
         <p class="text-[1.5rem] font-bold text-white tracking-[0.01563rem]">
-          Tambah Kerjaan
+          Edit Kerjaan
         </p>
         <div></div>
       </div>
