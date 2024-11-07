@@ -131,7 +131,7 @@ async function handleConfirm() {
         @click="handleConfirm"
         class="w-full py-[0.8125rem] text-white bg-[#D62727] text-center font-semibold rounded-[0.9375rem]"
       >
-        Konfirmasi
+        {{ kerjainStore.isLoading ? '...' : 'Konfirmasi' }}
       </button>
     </div>
   </div>
