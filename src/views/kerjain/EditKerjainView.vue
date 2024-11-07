@@ -7,6 +7,7 @@ import EditDataDiri from '@/modules/KerjainModule/edit-kerja/EditDataDiri.vue'
 import KonfirmasiEdit from '@/modules/KerjainModule/edit-kerja/KonfirmasiEdit.vue'
 import SuccessEdit from '@/modules/KerjainModule/edit-kerja/SuccessEdit.vue'
 import { useKerjainStore } from '@/stores/kerjainStores'
+import Cookies from 'js-cookie';
 
 const step = ref(1)
 const kerjainData = ref(null)
@@ -19,16 +20,25 @@ const router = useRouter()
 const kerjainStore = useKerjainStore()
 
 async function fetchKerjainData() {
+  const token = Cookies.get('accessToken')
   const id = route.params.id
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/kerjain/${id}`,
-    )
-    kerjainData.value = response.data.data
-  } catch (error) {
-    console.error('Error fetching Kerjain data:', error)
-  } finally {
-    isLoading.value = false
+  if(token) {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/kerjain/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      kerjainData.value = response.data.data.kerjain
+      console.log(kerjainData)
+    } catch (error) {
+      console.error('Error fetching Kerjain data:', error)
+    } finally {
+      isLoading.value = false
+    }
   }
 }
 
