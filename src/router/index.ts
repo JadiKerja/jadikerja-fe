@@ -17,6 +17,7 @@ import UpgradeDiriView from '@/views/UpgradeDiriView.vue'
 import JedAIView from '@/views/jedai/JedAIView.vue'
 import EditKerjainView from '@/views/kerjain/EditKerjainView.vue'
 import SemuaPenawaranView from '@/views/kerjain/SemuaPenawaranView.vue'
+import PickLocationView from '../views/kerjain/PickLocationView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -86,6 +87,11 @@ const router = createRouter({
       path: '/kerjain/add',
       name: 'add kerjain',
       component: AddKerjainView,
+    },
+    {
+      path: '/kerjain/pick-location',
+      name: 'pilih lokasi',
+      component: PickLocationView,
     },
     {
       path: '/carikerja',
