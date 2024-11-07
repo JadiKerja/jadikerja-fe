@@ -1,29 +1,30 @@
 <script setup lang="ts">
 import WhiteRobot from './WhiteRobot.vue'
 import ProfileChat from './ProfileChat.vue'
+import { useAuthStore } from '@/stores/userStores';
+
+const userAuth = useAuthStore();
 
 const props = defineProps<{
   role: string
   text: string
-  profileUrl: string
 }>()
 </script>
 
 <template>
   <div
     class="flex gap-2 w-full items-start"
-    :class="props.role === 'CLIENT' ? 'flex-row-reverse justify-end' : ''"
+    :class="props.role === 'CLIENT' ? 'flex-row-reverse' : ''"
   >
-    <component
-      :is="props.role === 'CLIENT' ? ProfileChat : WhiteRobot"
-      v-bind="props.role === 'CLIENT' ? { src: props.profileUrl } : {}"
-    />
+    <ProfileChat v-if="props.role === 'CLIENT'" :url="userAuth.user.client.profileUrl" />
+    <WhiteRobot v-else />
+
     <div
-      class="flex rounded-[0.9375rem]"
+      class="flex rounded-[0.9375rem] p-[1.125rem]"
       :class="
         props.role === 'CLIENT'
           ? 'bg-[#EEF0F3]'
-          : 'bg-[rgba(214, 39, 39, 0.20)]'
+          : 'bg-[#d6272733]'
       "
     >
       <p class="text-black text-[0.875rem]">

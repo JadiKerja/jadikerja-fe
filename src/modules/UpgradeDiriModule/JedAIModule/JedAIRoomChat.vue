@@ -1,18 +1,31 @@
 <script setup lang="ts">
+import { onMounted, ref, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/userStores'
 import TransparentCircle from '@/components/elements/TransparentCircle.vue'
 import WhiteBackButton from '@/components/elements/button/WhiteBackButton.vue'
-import { useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue'
-import { useAuthStore } from '@/stores/userStores'
 import RedRobot from '@/components/elements/RedRobot.vue'
 import SentIcon from '@/assets/images/SentIcon.vue'
 import ChatCard from '@/components/elements/ChatCard.vue'
 
 const message = ref('')
+const ListChat = ref<{ role: string, text: string }[]>([
+  { role: 'ASSISTANT', text: 'Halo! Adakah yang bisa Jed bantu?' }
+])
+
+const chatContainerRef = ref<HTMLElement | null>(null)
 
 function handleSendMessage() {
   if (message.value.trim()) {
+    ListChat.value.push({ role: 'CLIENT', text: message.value.trim() })
     message.value = ''
+    nextTick(() => scrollToBottom())
+  }
+}
+
+function scrollToBottom() {
+  if (chatContainerRef.value) {
+    chatContainerRef.value.scrollTop = chatContainerRef.value.scrollHeight
   }
 }
 
@@ -29,6 +42,7 @@ onMounted(async () => {
     await authStore.fetchUserData()
   }
   isLoading.value = false
+  nextTick(() => scrollToBottom())
 })
 </script>
 
@@ -66,26 +80,36 @@ onMounted(async () => {
       </div>
     </div>
     <div
-      class="w-full rounded-[1.875rem] mt-[-2rem] flex flex-col p-7 gap-5 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
-    ></div>
-    <div
-      class="w-full z-50 flex flex-col items-center fixed bottom-0 max-w-[393px] px-5"
+      ref="chatContainerRef"
+      class="w-full rounded-[1.875rem] mt-[-2rem] max-h-[80vh] flex flex-col py-7 px-4 gap-5 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
     >
+      <ChatCard
+        v-for="(chat, index) in ListChat"
+        :key="index"
+        :role="chat.role"
+        :text="chat.text"
+      />
+    </div>
+    <div
+      class="w-full z-30 flex flex-col items-center fixed bottom-0 max-w-[393px] px-5 bg-[#F8FAFF]">
       <div class="w-full h-[1px] bg-[#E9E9E9]"></div>
-      <div class="w-full flex flex-row items-center gap-2">
-        <input
-          type="text"
-          v-model="message"
-          class="py-8 w-full bg-[#F8FAFF] placeholder:text-[#A4A5AB] px-3 focus:outline-none focus:border-none"
-          placeholder="Tuliskan pesanmu disini..."
-          @keydown.enter="handleSendMessage"
-        />
-        <button
-          class="bg-[#D62727] p-2 rounded-full"
-          @click="handleSendMessage"
+        <div
+          class="w-full flex flex-row items-center gap-2 py-4"
         >
-          <SentIcon />
-        </button>
+          <textarea
+            v-model="message"
+            class="py-4 w-full bg-[#F8FAFF] placeholder:text-[#A4A5AB] px-3 focus:outline-none focus:border-none resize-none custom-scrollbar-hidden"
+            placeholder="Tuliskan pesanmu disini..."
+            @input="scrollToBottom"
+            @keydown.enter="handleSendMessage"
+            rows="1"
+          ></textarea>
+          <button
+            class="bg-[#D62727] p-2 rounded-full"
+            @click="handleSendMessage"
+          >
+            <SentIcon />
+          </button>
       </div>
     </div>
   </div>
