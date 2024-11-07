@@ -38,7 +38,7 @@ async function handleApply() {
       },
     )
 
-    if (response.data.code === 200) {
+    if (response.data.code === 201) {
       router.push(`/kerjain/chat/${response.data.data.kerjain.id}`)
       return
     }
