@@ -18,6 +18,7 @@ import JedAIView from '@/views/jedai/JedAIView.vue'
 import EditKerjainView from '@/views/kerjain/EditKerjainView.vue'
 import SemuaPenawaranView from '@/views/kerjain/SemuaPenawaranView.vue'
 import PickLocationView from '../views/kerjain/PickLocationView.vue'
+import SemuaKerjainView from '@/views/kerjain/SemuaKerjainView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -118,6 +119,11 @@ const router = createRouter({
       name: 'semua penawaran',
       component: SemuaPenawaranView,
     },
+    {
+      path: '/kerjainsaya',
+      name: 'semua kerjain saya',
+      component: SemuaKerjainView
+    }
   ],
 })
 
