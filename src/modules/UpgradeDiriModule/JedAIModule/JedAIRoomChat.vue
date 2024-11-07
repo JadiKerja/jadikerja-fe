@@ -7,19 +7,27 @@ import WhiteBackButton from '@/components/elements/button/WhiteBackButton.vue'
 import RedRobot from '@/components/elements/RedRobot.vue'
 import SentIcon from '@/assets/images/SentIcon.vue'
 import ChatCard from '@/components/elements/ChatCard.vue'
+import { useJedAIStore } from '@/stores/jedAIStores'
 
 const message = ref('')
-const ListChat = ref<{ role: string; text: string }[]>([
-  { role: 'ASSISTANT', text: 'Halo! Adakah yang bisa Jed bantu?' },
-])
+
+const jedAIStore = useJedAIStore()
 
 const chatContainerRef = ref<HTMLElement | null>(null)
 
-function handleSendMessage() {
+async function handleSendMessage(e) {
+  e.preventDefault()
+
+  if (jedAIStore.isLoading) return
+
   if (message.value.trim()) {
-    ListChat.value.push({ role: 'CLIENT', text: message.value.trim() })
+    const messageSent = message.value.trim()
     message.value = ''
     nextTick(() => scrollToBottom())
+    await jedAIStore.sendMessage({
+      role: 'user',
+      content: messageSent,
+    })
   }
 }
 
@@ -79,36 +87,50 @@ onMounted(async () => {
         <div></div>
       </div>
     </div>
-    <div
-      ref="chatContainerRef"
-      class="w-full rounded-[1.875rem] mt-[-2rem] max-h-[80vh] flex flex-col py-7 px-4 gap-5 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
-    >
-      <ChatCard
-        v-for="(chat, index) in ListChat"
-        :key="index"
-        :role="chat.role"
-        :text="chat.text"
-      />
-    </div>
-    <div
-      class="w-full z-30 flex flex-col items-center fixed bottom-0 max-w-[393px] px-5 bg-[#F8FAFF]"
-    >
-      <div class="w-full h-[1px] bg-[#E9E9E9]"></div>
-      <div class="w-full flex flex-row items-center gap-2 py-4">
-        <textarea
-          v-model="message"
-          class="py-4 w-full bg-[#F8FAFF] placeholder:text-[#A4A5AB] px-3 focus:outline-none focus:border-none resize-none custom-scrollbar-hidden"
-          placeholder="Tuliskan pesanmu disini..."
-          @input="scrollToBottom"
-          @keydown.enter="handleSendMessage"
-          rows="1"
-        ></textarea>
-        <button
-          class="bg-[#D62727] p-2 rounded-full"
-          @click="handleSendMessage"
-        >
-          <SentIcon />
-        </button>
+    <div class="flex flex-col justify-between w-full h-full max-h-[75vh]">
+      <div
+        ref="chatContainerRef"
+        class="w-full rounded-[1.875rem] mt-[-2rem] h-full flex flex-col py-7 px-4 gap-5 z-20 bg-[#F8FAFF] overflow-y-auto custom-scrollbar-hidden"
+      >
+        <ChatCard
+          v-for="(chat, index) in jedAIStore.chat"
+          :key="index"
+          :role="chat.role"
+          :text="chat.content"
+        />
+        <ChatCard
+          v-if="jedAIStore.isLoading"
+          :key="'loading'"
+          :role="'assistant'"
+          :text="'...'"
+        />
+      </div>
+      <div
+        class="w-full z-30 flex flex-col items-center bottom-0 max-w-[393px] px-5 bg-[#F8FAFF]"
+      >
+        <div class="w-full h-[1px] bg-[#E9E9E9]"></div>
+        <div class="w-full flex flex-row items-center gap-2 py-4">
+          <textarea
+            v-model="message"
+            class="py-4 w-full bg-[#F8FAFF] placeholder:text-[#A4A5AB] px-3 focus:outline-none focus:border-none resize-none custom-scrollbar-hidden"
+            placeholder="Tuliskan pesanmu disini..."
+            @input="scrollToBottom"
+            @keydown.enter="handleSendMessage"
+            rows="1"
+          ></textarea>
+          <button
+            :class="[
+              'p-2 rounded-full',
+              jedAIStore.isLoading
+                ? 'bg-gray-400 hover:cursor-not-allowed'
+                : 'bg-[#D62727]',
+            ]"
+            @click="handleSendMessage"
+            :disabled="jedAIStore.isLoading"
+          >
+            <SentIcon />
+          </button>
+        </div>
       </div>
     </div>
   </div>
