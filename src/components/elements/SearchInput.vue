@@ -1,15 +1,46 @@
 <script setup lang="ts">
 import SearchIcon from '@/assets/images/SearchIcon.vue'
+
+const props = defineProps<{
+  isBeranda: boolean
+  isCariKerja?: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'search', value: string): void
+}>()
+
+function handleSearch(event: Event) {
+  const target = event.target as HTMLInputElement
+  emit('search', target.value)
+}
 </script>
 
 <template>
   <div class="flex flex-row">
     <input
       type="text"
-      placeholder="Cari kerja gak pake ribet di sini!"
-      class="text-[0.753rem] font-medium placeholder:text-[#AAA5A5] text-[#0A0E32] py-4 px-5 bg-white w-full rounded-l-[0.6275rem]"
+      :placeholder="
+        isBeranda
+          ? 'Cari kerja gak pake ribet di sini!'
+          : isCariKerja
+            ? 'Cari pekerjaan yang kamu inginkan'
+            : 'Cari materi disini'
+      "
+      :class="[
+        'text-[0.753rem] font-medium text-[#0A0E32] bg-white w-full rounded-l-[0.6275rem]',
+        isBeranda
+          ? 'py-4 px-5 placeholder:text-[#AAA5A5]'
+          : 'py-3 px-5 placeholder:text-[#AAA5A5]',
+      ]"
+      @input="handleSearch"
     />
-    <button class="p-2 bg-[#D62727] rounded-r-[0.6275rem]">
+    <button
+      :class="[
+        'rounded-r-[0.6275rem]',
+        isBeranda ? 'bg-[#D62727] p-2' : 'bg-[#F4A91E] py-2 px-3',
+      ]"
+    >
       <SearchIcon />
     </button>
   </div>

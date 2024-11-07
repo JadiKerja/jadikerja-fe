@@ -2,7 +2,7 @@
 import { useProfileStore } from '@/stores/profileStores'
 import { useInputStore } from '@/stores/authStores'
 import { useAuthStore } from '@/stores/userStores'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import InputImage from '@/components/elements/InputImage.vue'
@@ -16,6 +16,9 @@ const authStore = useInputStore()
 const authPiniaStore = useAuthStore()
 const router = useRouter()
 
+const isLoading = ref(true)
+const isSubmitting = ref(false)
+
 function formatDateToYYYYMMDD(dateString: string): string {
   const date = new Date(dateString)
   const year = date.getFullYear()
@@ -24,11 +27,21 @@ function formatDateToYYYYMMDD(dateString: string): string {
   return `${year}-${month}-${day}`
 }
 
-authStore.fullName = authPiniaStore.user.client.fullName
-authStore.birthDate = formatDateToYYYYMMDD(authPiniaStore.user.client.birthDate)
-authStore.location = authPiniaStore.user.client.domicile
-authStore.phoneNumber = authPiniaStore.user.client.phone
-profileStore.selectedImageUrl = authPiniaStore.user.client.profileUrl
+onMounted(async () => {
+  if (!authPiniaStore.user) {
+    await authPiniaStore.fetchUserData()
+  }
+
+  authStore.fullName = authPiniaStore.user.client.fullName
+  authStore.birthDate = formatDateToYYYYMMDD(
+    authPiniaStore.user.client.birthDate,
+  )
+  authStore.location = authPiniaStore.user.client.domicile
+  authStore.phoneNumber = authPiniaStore.user.client.phone
+  profileStore.selectedImageUrl = authPiniaStore.user.client.profileUrl
+
+  isLoading.value = false
+})
 
 const selectedImage = computed(() => profileStore.selectedImage)
 const imageUploadError = ref<string | null>(null)
@@ -46,6 +59,7 @@ function handleFileChange(event: Event) {
 async function handleSubmit() {
   formError.value = null
   imageUploadError.value = null
+  isSubmitting.value = true
 
   if (
     !authStore.fullName ||
@@ -54,6 +68,7 @@ async function handleSubmit() {
     !authStore.phoneNumber
   ) {
     formError.value = 'Please fill in all fields.'
+    isSubmitting.value = false
     return
   }
 
@@ -69,6 +84,7 @@ async function handleSubmit() {
 
       if (!imageUrl) {
         imageUploadError.value = 'Failed to upload image. Please try again.'
+        isSubmitting.value = false
         return
       }
     }
@@ -84,6 +100,7 @@ async function handleSubmit() {
     const token = Cookies.get('accessToken')
     if (!token) {
       formError.value = 'Authentication error. Please log in again.'
+      isSubmitting.value = false
       return
     }
 
@@ -106,6 +123,8 @@ async function handleSubmit() {
     console.error('Error submitting profile:', error)
     imageUploadError.value =
       'An error occurred during submission. Please try again.'
+  } finally {
+    isSubmitting.value = false
   }
 }
 
@@ -115,7 +134,11 @@ function goBack() {
 </script>
 
 <template>
+  <div v-if="isLoading" class="flex items-center justify-center min-h-screen">
+    <div class="loader"></div>
+  </div>
   <div
+    v-else
     class="flex flex-col relative w-full min-h-screen items-center pb-[2.5rem] pt-12 px-7 gap-4"
   >
     <BackButton class="self-start absolute" @click="goBack" />
@@ -129,7 +152,6 @@ function goBack() {
       @submit.prevent="handleSubmit"
     >
       <InputImage :selectedImage="selectedImage" @change="handleFileChange" />
-
       <InputAuth
         label="Nama Lengkap"
         placeholder="Nama Lengkap"
@@ -152,16 +174,36 @@ function goBack() {
       <p v-if="imageUploadError" class="text-red-500 text-sm">
         {{ imageUploadError }}
       </p>
-      <p v-if="formError" class="text-red-500 text-sm">
-        {{ formError }}
-      </p>
+      <p v-if="formError" class="text-red-500 text-sm">{{ formError }}</p>
 
       <button
         type="submit"
         class="w-full flex p-[0.6275rem] justify-center items-center rounded-[1.5rem] bg-[#D62727] min-w-[9.9375rem] text-white font-semibold"
+        :disabled="isSubmitting"
       >
-        Simpan Perubahan
+        <span v-if="!isSubmitting">Simpan Perubahan</span>
+        <div v-else class="loader"></div>
       </button>
     </form>
   </div>
 </template>
+
+<style scoped>
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #d62727;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

@@ -32,10 +32,10 @@ const emit = defineEmits(['next', 'back'])
     <div class="flex flex-col gap-[0.94rem] items-center z-10">
       <YellowVerified />
       <p class="text-[2rem] text-white text-center font-bold">
-        Berhasil Menambah Pekerjan
+        Berhasil Mengedit Pekerjan
       </p>
       <p class="text-[#EEF0F3] text-center">
-        Kamu telah berhasil menambah pekerjaan untuk ditawarkan.
+        Kamu telah berhasil mengubah pekerjaan kamu.
       </p>
     </div>
     <div class="flex flex-col gap-[0.94rem] z-10">

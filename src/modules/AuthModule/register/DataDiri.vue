@@ -16,6 +16,7 @@ const authPiniaStore = useAuthStore()
 const selectedImage = computed(() => profileStore.selectedImage)
 const emit = defineEmits(['back', 'submit'])
 const imageUploadError = ref<string | null>(null)
+const isLoading = ref(false)
 
 function handleFileChange(event: Event) {
   const target = event.target as HTMLInputElement
@@ -27,6 +28,7 @@ function handleFileChange(event: Event) {
 }
 
 async function handleSubmit() {
+  isLoading.value = true
   try {
     let imageUrl = null
 
@@ -39,6 +41,7 @@ async function handleSubmit() {
 
     if (!imageUrl) {
       imageUploadError.value = 'Failed to upload image. Please try again.'
+      isLoading.value = false
       return
     }
 
@@ -67,6 +70,8 @@ async function handleSubmit() {
     console.error('Error submitting profile:', error)
     imageUploadError.value =
       'An error occurred during submission. Please try again.'
+  } finally {
+    isLoading.value = false
   }
 }
 </script>
@@ -92,26 +97,56 @@ async function handleSubmit() {
         label="Nama Lengkap"
         placeholder="Nama Lengkap"
         field="fullName"
+        @keyup.enter="handleSubmit"
       />
       <InputAuth
         label="Tanggal Lahir"
         placeholder="DD/MM/YYYY"
         field="birthDate"
         type="date"
+        @keyup.enter="handleSubmit"
       />
-      <InputAuth label="Domisili" placeholder="Domisili" field="location" />
+      <InputAuth
+        label="Domisili"
+        placeholder="Domisili"
+        field="location"
+        @keyup.enter="handleSubmit"
+      />
       <InputAuth
         label="No. Telepon"
         placeholder="No. Telepon"
         field="phoneNumber"
+        @keyup.enter="handleSubmit"
       />
 
       <button
         type="submit"
         class="w-full flex p-[0.6275rem] justify-center items-center rounded-[1.5rem] bg-[#D62727] min-w-[9.9375rem] text-white font-semibold"
+        :disabled="isLoading"
       >
-        Simpan
+        <span v-if="!isLoading">Simpan</span>
+        <div v-else class="loader"></div>
       </button>
     </form>
   </div>
 </template>
+
+<style scoped>
+.loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #ffffff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
