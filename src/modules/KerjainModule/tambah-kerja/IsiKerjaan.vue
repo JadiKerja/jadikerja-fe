@@ -73,11 +73,11 @@ const canProceed = computed(() => {
           to="/kerjain/pick-location"
           class="pr-4 border-[1.506px] border-solid px-4 py-4 rounded-[0.6275rem] flex items-center bg-white hover:bg-[#E55A2466] w-full text-black placeholder:text-[#AEACAC] transition-all"
         >
-          {{
-            kerjainStore.lat && kerjainStore.lng
-              ? `Lat: ${kerjainStore.lat} Lng: ${kerjainStore.lng}`
-              : 'Pilih lokasi Anda'
-          }}
+          <span v-if="kerjainStore.lat && kerjainStore.lng">
+            <p>Lat: {{ kerjainStore.lat }}</p>
+            <p>Lng: {{ kerjainStore.lng }}</p>
+          </span>
+          <p v-else>Pilih lokasi Anda</p>
         </RouterLink>
       </div>
       <div class="flex flex-col gap-4">

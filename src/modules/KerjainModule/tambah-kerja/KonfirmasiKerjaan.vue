@@ -9,13 +9,10 @@ import { useKerjainStore } from '@/stores/kerjainStores'
 const kerjainStore = useKerjainStore()
 const emit = defineEmits(['next', 'back', 'editIsiKerjaan'])
 
-function handleConfirm() {
+async function handleConfirm() {
+  await kerjainStore.createKerjain()
   emit('next')
-  kerjainStore.detailAddress = ''
-  kerjainStore.jobType = ''
-  kerjainStore.price = ''
-  kerjainStore.name = ''
-  kerjainStore.phoneNumber = ''
+  kerjainStore.resetState()
 }
 </script>
 
@@ -76,7 +73,7 @@ function handleConfirm() {
               Nama Lengkap
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              {{ kerjainStore.name }}
+              {{ kerjainStore.contactPersonName }}
             </p>
           </div>
           <div class="flex flex-col gap-1">
@@ -84,7 +81,7 @@ function handleConfirm() {
               Nomor Telepon
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              +62{{ kerjainStore.phoneNumber }}
+              +62{{ kerjainStore.contactPersonPhone }}
             </p>
           </div>
         </div>
@@ -108,7 +105,7 @@ function handleConfirm() {
           <div class="flex flex-col gap-1">
             <p class="text-[0.625rem] font-medium text-[#AEACAC]">Alamat</p>
             <p class="text-black text-[0.75rem] font-medium">
-              {{ kerjainStore.detailAddress }}
+              {{ kerjainStore.address }}
             </p>
           </div>
           <div class="flex flex-col gap-1">
@@ -116,7 +113,7 @@ function handleConfirm() {
               Jenis Pekerjaan
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              {{ kerjainStore.jobType }}
+              {{ kerjainStore.title }}
             </p>
           </div>
           <div class="flex flex-col gap-1">
@@ -124,7 +121,7 @@ function handleConfirm() {
               Harga yang ditawarkan
             </p>
             <p class="text-black text-[0.75rem] font-medium">
-              Rp{{ kerjainStore.price }}
+              Rp{{ kerjainStore.salary }}
             </p>
           </div>
         </div>
